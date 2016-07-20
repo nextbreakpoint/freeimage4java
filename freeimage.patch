@@ -1,0 +1,93 @@
+Index: /FreeImage/Source/LibWebP/src/webp/types.h
+===================================================================
+RCS file: /cvsroot/freeimage/FreeImage/Source/LibWebP/src/webp/types.h,v
+retrieving revision 1.3
+diff -u -r1.3 types.h
+--- /FreeImage/Source/LibWebP/src/webp/types.h	29 Nov 2014 17:04:10 -0000	1.3
++++ /FreeImage/Source/LibWebP/src/webp/types.h	19 Jul 2016 22:31:56 -0000
+@@ -33,7 +33,11 @@
+ typedef unsigned int uint32_t;
+ typedef unsigned long long int uint64_t;
+ typedef long long int int64_t;
++#if !defined(__MINGW64_TOOLCHAIN__)
+ #define WEBP_INLINE __forceinline
++#else
++#define WEBP_INLINE
++#endif
+ #endif  /* _MSC_VER */
+ 
+ #ifndef WEBP_EXTERN
+
+
+Index: /FreeImage/Source/OpenEXR/IlmImf/ImfSystemSpecific.h
+===================================================================
+RCS file: /cvsroot/freeimage/FreeImage/Source/OpenEXR/IlmImf/ImfSystemSpecific.h,v
+retrieving revision 1.1
+diff -u -r1.1 ImfSystemSpecific.h
+--- /FreeImage/Source/OpenEXR/IlmImf/ImfSystemSpecific.h	28 Sep 2014 22:53:12 -0000	1.1
++++ /FreeImage/Source/OpenEXR/IlmImf/ImfSystemSpecific.h	19 Jul 2016 22:32:18 -0000
+@@ -54,7 +54,7 @@
+ 
+ #ifdef IMF_HAVE_SSE2
+ 
+-#ifdef __GNUC__
++#if defined(__GNUC__) && !defined(__MINGW32__)
+ // Causes issues on certain gcc versions
+ //#define EXR_FORCEINLINE inline __attribute__((always_inline))
+ #define EXR_FORCEINLINE inline
+
+
+diff -u /usr/share/mingw-w64/include/unknwnbase.h /usr/share/mingw-w64/include/unknwnbase.h
+--- /usr/share/mingw-w64/include/unknwnbase.h	2016-07-19 22:08:30.411061114 +0000
++++ /usr/share/mingw-w64/include/unknwnbase.h	2016-07-19 22:34:41.108053657 +0000
+@@ -71,7 +71,7 @@
+ 
+     template<class Q>
+     HRESULT STDMETHODCALLTYPE QueryInterface(Q **pp) {
+-      return QueryInterface(__uuidof(Q), (void **)pp);
++      return QueryInterface(__uuidof(pp), (void **)pp);
+     }
+     END_INTERFACE
+   };
+
+
+diff -u /usr/share/mingw-w64/include/servprov.h /usr/share/mingw-w64/include/servprov.h
+--- /usr/share/mingw-w64/include/servprov.h	2016-07-19 22:08:47.510648873 +0000
++++ /usr/share/mingw-w64/include/servprov.h	2016-07-19 22:34:26.971329424 +0000
+@@ -63,7 +63,7 @@
+ 
+ template <class Q>
+ HRESULT STDMETHODCALLTYPE QueryService(REFGUID guidService, Q **pp) {
+-  return QueryService(guidService, __uuidof(Q), (void **)pp);
++  return QueryService(guidService, __uuidof(pp), (void **)pp);
+ }
+ };
+ }
+
+
+diff -u /FreeImage/Source/LibOpenJPEG/opj_config_private.h /FreeImage/Source/LibOpenJPEG/opj_config_private.h
+--- /FreeImage/Source/LibOpenJPEG/opj_config_private.h  2016-07-20 17:50:14.508699205 +0000
++++ /FreeImage/Source/LibOpenJPEG/opj_config_private.h  2016-07-20 17:50:04.888926308 +0000
+@@ -13,4 +13,8 @@
+ #define OPJ_BIG_ENDIAN
+ #endif /* BYTE_ORDER */
+ 
++#if defined(__MINGW64_TOOLCHAIN__)
++#define INLINE
++#endif
++
+ #endif /* OPJ_CONFIG_PRIVATE_H */
+
+
+diff -u /FreeImage/Source/LibOpenJPEG/opj_includes.h /FreeImage/Source/LibOpenJPEG/opj_includes.h
+--- /FreeImage/Source/LibOpenJPEG/opj_includes.h  2014-03-16 12:29:52.000000000 +0000
++++ /FreeImage/Source/LibOpenJPEG/opj_includes.h  2016-07-20 18:07:14.374622953 +0000
+@@ -115,7 +115,7 @@
+ 
+ /* MSVC before 2013 and Borland C do not have lrintf */
+ #if defined(_MSC_VER) && (_MSC_VER < 1800) || defined(__BORLANDC__)
+-static INLINE long lrintf(float f){
++INLINE long lrintf(float f){
+ #ifdef _M_X64
+     return (long)((f>0.0f) ? (f + 0.5f):(f -0.5f));
+ #else
