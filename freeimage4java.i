@@ -3,7 +3,7 @@
 %include "carrays.i"
 
 %{
-#include "Source/FreeImage.h"
+#include <FreeImage.h>
 %}
 
 %javaconst(1);

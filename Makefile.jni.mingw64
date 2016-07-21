@@ -16,9 +16,9 @@ archive-wrapper:
 	cd $(BUILD_DIR)/src/net/sf/freeimage4java; $(JAVA_HOME)/bin/javac -verbose -d ../../../../bin *
 	cd $(BUILD_DIR); $(JAVA_HOME)/bin/jar cvf freeimage4java.jar -C bin .
 	cd $(BUILD_DIR); tar -cjf freeimage4java.tar.bz2 src/net/sf/freeimage4java
-	cp $(BUILD_DIR)/$(LIB_ARCH)/*dll dist/$(LIB_ARCH)
-	cp $(BUILD_DIR)/$(LIB_ARCH)/*dll dist
-	cp $(BUILD_DIR)/freeimage4java.jar dist
-	cp $(BUILD_DIR)/freeimage4java.tar.bz2 dist
+	cp $(BUILD_DIR)/$(LIB_ARCH)/*dll $(BUILD_DIR)/$(LIB_ARCH)
+	cp $(BUILD_DIR)/$(LIB_ARCH)/*dll $(BUILD_DIR)
+	cp $(BUILD_DIR)/freeimage4java.jar $(BUILD_DIR)
+	cp $(BUILD_DIR)/freeimage4java.tar.bz2 $(BUILD_DIR)
 
 all: build-wrapper archive-wrapper

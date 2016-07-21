@@ -80,14 +80,15 @@ diff -u /FreeImage/Source/LibOpenJPEG/opj_config_private.h /FreeImage/Source/Lib
 
 
 diff -u /FreeImage/Source/LibOpenJPEG/opj_includes.h /FreeImage/Source/LibOpenJPEG/opj_includes.h
---- /FreeImage/Source/LibOpenJPEG/opj_includes.h  2014-03-16 12:29:52.000000000 +0000
-+++ /FreeImage/Source/LibOpenJPEG/opj_includes.h  2016-07-20 18:07:14.374622953 +0000
-@@ -115,7 +115,7 @@
+--- /FreeImage/Source/LibOpenJPEG/opj_includes.h	2016-07-21 07:43:02.480419564 +0000
++++ /FreeImage/Source/LibOpenJPEG/opj_includes.h	2016-07-21 07:47:09.333602508 +0000
+@@ -114,7 +114,7 @@
+ #endif
  
  /* MSVC before 2013 and Borland C do not have lrintf */
- #if defined(_MSC_VER) && (_MSC_VER < 1800) || defined(__BORLANDC__)
--static INLINE long lrintf(float f){
-+INLINE long lrintf(float f){
+-#if defined(_MSC_VER) && (_MSC_VER < 1800) || defined(__BORLANDC__)
++#if defined(_MSC_VER) && !defined(__MINGW32__) && (_MSC_VER < 1800) || defined(__BORLANDC__)
+ static INLINE long lrintf(float f){
  #ifdef _M_X64
      return (long)((f>0.0f) ? (f + 0.5f):(f -0.5f));
- #else
+
