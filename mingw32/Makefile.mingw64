@@ -47,8 +47,8 @@ RM = rm
 LIBRARIES = -lws2_32
 
 # Define some additional symboles needed for WIN32 based builds.
-WIN32_CFLAGS = -DWIN32 -D__MINGW64_TOOLCHAIN__ -D_MSC_VER=0x0500 -DWINVER=0x0500 $(LIB_TYPE_FLAGS) -DOPJ_STATIC
-WIN32_CXXFLAGS = $(WIN32_CFLAGS) -DLIBRAW_NODLL -D__CRT__NO_INLINE
+WIN32_CFLAGS = -DWIN32 -D__MINGW64_TOOLCHAIN__ -D_MSC_VER=0x0500 -DWINVER=0x0500 $(LIB_TYPE_FLAGS) -DOPJ_STATIC -D__CRT__NO_INLINE
+WIN32_CXXFLAGS = $(WIN32_CFLAGS) -DLIBRAW_NODLL
 
 # Workaround for LibRawLite, which does not include C++ header
 # file stdexcept, which is casually included with MSVC but not

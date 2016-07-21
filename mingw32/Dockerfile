@@ -14,9 +14,10 @@ RUN apt-get update && apt-get install -y oracle-java8-installer oracle-java8-set
 RUN cvs -z3 -d:pserver:anonymous@freeimage.cvs.sourceforge.net:/cvsroot/freeimage co -P FreeImage
 
 COPY freeimage.patch FreeImage/freeimage.patch
-COPY freeimage4java.i FreeImage/freeimage4java.i 
 COPY Makefile.mingw64 FreeImage/Makefile.mingw64
 COPY Makefile.jni.mingw64 FreeImage/Makefile.jni.mingw64
+
+COPY ../freeimage4java.i FreeImage/freeimage4java.i 
 
 RUN patch -p0 < FreeImage/freeimage.patch
 
