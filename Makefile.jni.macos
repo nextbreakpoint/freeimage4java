@@ -1,7 +1,6 @@
-JAVA_HOME=/usr/lib/jvm/java-8-oracle
-FREEIMAGE_DIR=/FreeImage
-BUILD_DIR=/build
-DIST_DIR=/dist
+JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_51.jdk/Contents/Home/
+BUILD_DIR=../build
+DIST_DIR=../dist
 LIB_TYPE=64
 ARCH=x86_64
 LIB_ARCH=x86_$(LIB_TYPE)
@@ -10,15 +9,15 @@ build-wrapper:
 	mkdir -p $(BUILD_DIR)/$(LIB_ARCH)
 	cd $(BUILD_DIR) && mkdir -p src/com/nextbreakpoint/freeimage4java
 	cd $(BUILD_DIR) && mkdir -p bin/com/nextbreakpoint/freeimage4java
-	cd $(BUILD_DIR) && swig -v -c++ -java -outcurrentdir -outdir src/com/nextbreakpoint/freeimage4java -package com.nextbreakpoint.freeimage4java $(FREEIMAGE_DIR)/freeimage4java.i
-	cd $(BUILD_DIR) && g++ --verbose -o $(BUILD_DIR)/$(LIB_ARCH)/freeimage4java.dll -L$(BUILD_DIR) -I$(BUILD_DIR) -I$(JAVA_HOME)/include -I$(JAVA_HOME)/include/linux -Wl,--out-implib=freeimage4java.dynlib -Wl,-add-stdcall-alias -shared -fPIC -Wall -m$(LIB_TYPE) -DFREEIMAGE_LIB freeimage4java_wrap.cxx -lFreeImage -lm
+	cd $(BUILD_DIR) && swig -v -c++ -java -outcurrentdir -outdir src/com/nextbreakpoint/freeimage4java -package com.nextbreakpoint.freeimage4java ../freeimage4java.i
+	cd $(BUILD_DIR) && g++ --verbose -o $(BUILD_DIR)/$(LIB_ARCH)/freeimage4java.dylib -L$(BUILD_DIR) -I$(BUILD_DIR) -I$(JAVA_HOME)/include -I$(JAVA_HOME)/include/darwin -shared -fPIC -Wall -m$(LIB_TYPE) -DFREEIMAGE_LIB -lFreeImage -lm freeimage4java_wrap.cxx
 
 archive-wrapper:
 	mkdir -p $(DIST_DIR)/$(LIB_ARCH)
 	cd $(BUILD_DIR)/src/com/nextbreakpoint/freeimage4java && $(JAVA_HOME)/bin/javac -verbose -d ../../../../bin *
 	cd $(BUILD_DIR) && $(JAVA_HOME)/bin/jar cvf freeimage4java.jar -C bin .
 	cd $(BUILD_DIR) && tar -cjf freeimage4java.tar.bz2 src/com/nextbreakpoint/freeimage4java
-	cp $(BUILD_DIR)/$(LIB_ARCH)/*.dynlib $(DIST_DIR)/$(LIB_ARCH)
+	cp $(BUILD_DIR)/$(LIB_ARCH)/*.dylib $(DIST_DIR)/$(LIB_ARCH)
 	cp $(BUILD_DIR)/freeimage4java.jar $(DIST_DIR)
 	cp $(BUILD_DIR)/freeimage4java.tar.bz2 $(DIST_DIR)
 

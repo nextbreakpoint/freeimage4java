@@ -11,7 +11,7 @@ build-wrapper:
 	cd $(BUILD_DIR) && mkdir -p src/com/nextbreakpoint/freeimage4java
 	cd $(BUILD_DIR) && mkdir -p bin/com/nextbreakpoint/freeimage4java
 	cd $(BUILD_DIR) && swig -v -c++ -java -outcurrentdir -outdir src/com/nextbreakpoint/freeimage4java -package com.nextbreakpoint.freeimage4java $(FREEIMAGE_DIR)/freeimage4java.i
-	cd $(BUILD_DIR) && x86_64-w64-mingw32-g++ --verbose -o $(BUILD_DIR)/$(LIB_ARCH)/freeimage4java.dll -L$(BUILD_DIR) -I$(BUILD_DIR) -I$(JAVA_HOME)/include -I$(JAVA_HOME)/include/linux -Wl,--out-implib=libfreeimage4java.dll.a -Wl,-add-stdcall-alias -shared -fPIC -Wall -m$(LIB_TYPE) -DFREEIMAGE_LIB freeimage4java_wrap.cxx -lFreeImage -lm -lws2_32
+	cd $(BUILD_DIR) && x86_64-w64-mingw32-g++ --verbose -o $(BUILD_DIR)/$(LIB_ARCH)/freeimage4java.dll -L$(BUILD_DIR) -I$(BUILD_DIR) -I$(JAVA_HOME)/include -I$(JAVA_HOME)/include/linux -Wl,--out-implib=libfreeimage4java.dll.a -Wl,-add-stdcall-alias -shared -fPIC -Wall -m$(LIB_TYPE) -DFREEIMAGE_LIB -lFreeImage -lm -lws2_32 freeimage4java_wrap.cxx
 
 archive-wrapper:
 	mkdir -p $(DIST_DIR)/$(LIB_ARCH)
