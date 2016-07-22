@@ -18,11 +18,15 @@ COPY freeimage4java.i FreeImage/freeimage4java.i
 COPY Makefile.lib.mingw64 FreeImage/Makefile.lib.mingw64
 COPY Makefile.jni.mingw64 FreeImage/Makefile.jni.mingw64
 
+COPY build-mingw64.sh build-mingw64.sh
+
 COPY mingw64.patch FreeImage/mingw64.patch
 
 RUN patch -p0 < FreeImage/mingw64.patch
 
+RUN chmod 700 /build-mingw64.sh
+
 RUN mkdir /build
 RUN mkdir /dist
 
-CMD ["bash"]
+CMD ["sh", "-c", "/build-mingw64.sh"]
