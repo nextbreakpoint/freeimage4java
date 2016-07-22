@@ -12,16 +12,16 @@ RCFILE = FreeImage.rc
 INCLUDE= -I/usr/x86_64-w64-mingw32/include \
 	-I/FreeImage/Source \
 	-I/FreeImage/Source/ZLib \
-	-I/FreeImage/Source/OpenEXR \ 
+	-I/FreeImage/Source/OpenEXR \
 	-I/FreeImage/Source/OpenEXR/Half \
-	-I/FreeImage/Source/OpenEXR/Iex \ 
-	-I/FreeImage/Source/OpenEXR/IexMath \ 
-	-I/FreeImage/Source/OpenEXR/Imath \ 
-	-I/FreeImage/Source/OpenEXR/IlmImf \ 
-	-I/FreeImage/Source/OpenEXR/IlmThread \ 
-	-I/FreeImage/Source/LibJXR/jxrgluelib \ 
-	-I/FreeImage/Source/LibJXR/image/sys \ 
-	-I/FreeImage/Source/LibJXR/common/include \ 
+	-I/FreeImage/Source/OpenEXR/Iex \
+	-I/FreeImage/Source/OpenEXR/IexMath \
+	-I/FreeImage/Source/OpenEXR/Imath \
+	-I/FreeImage/Source/OpenEXR/IlmImf \
+	-I/FreeImage/Source/OpenEXR/IlmThread \
+	-I/FreeImage/Source/LibJXR/jxrgluelib \
+	-I/FreeImage/Source/LibJXR/image/sys \
+	-I/FreeImage/Source/LibJXR/common/include \
 	-I/FreeImage/Source/LibRawLite
 
 # Uncomment this variable to make a static library. This may
