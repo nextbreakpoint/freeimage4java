@@ -4,7 +4,7 @@
 include Makefile.srcs
 
 # General configuration variables:
-DESTDIR = Build
+DISTDIR = Build
 INCDIR = Source
 
 # Converts cr/lf to just lf
@@ -46,8 +46,8 @@ all: dist
 
 dist: FreeImage
 	$(MD) $(DISTDIR)
-	$(CP) *.a $(DESTDIR)
-	$(CP) Source/FreeImage.h $(DESTDIR)
+	$(CP) *.a $(DISTDIR)
+	$(CP) Source/FreeImage.h $(DISTDIR)
 
 dos2unix:
 	@$(DOS2UNIX) $(SRCS) $(INCLS)
@@ -67,5 +67,5 @@ $(SHAREDLIB): $(MODULES)
 	$(CC) -shared -Wl,-soname,$(VERLIBNAME) $(LDFLAGS) -o $@ $(MODULES) $(LIBRARIES)
 
 clean:
-	$(RM) -f core $(DESTDIR)/*.* u2dtmp* $(MODULES) $(STATICLIB) $(SHAREDLIB) $(LIBNAME)
+	$(RM) -f core $(DISTDIR)/*.* u2dtmp* $(MODULES) $(STATICLIB) $(SHAREDLIB) $(LIBNAME)
 
