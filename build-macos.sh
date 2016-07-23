@@ -1,4 +1,6 @@
 #/bin/sh
+export DIST_DIR=../dist/macos
+
 rm -fR FreeImage
 
 cvs -z3 -d:pserver:anonymous@freeimage.cvs.sourceforge.net:/cvsroot/freeimage co -P FreeImage

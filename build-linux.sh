@@ -1,4 +1,6 @@
 #/bin/sh
+export DIST_DIR=/dist/linux
+
 cd FreeImage
 
 make -f Makefile.lib.linux all
