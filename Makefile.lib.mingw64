@@ -4,25 +4,12 @@
 include Makefile.srcs
 
 # General configuration variables.
-INSTALLDIR ?= /build
-DISTDIR ?= /build
-SRCDIR ?= Source
+DISTDIR = Build
+INCDIR = Source
+SRCDIR = Source
 HEADER = FreeImage.h
 RCFILE = FreeImage.rc
-INCLUDE= -I/usr/x86_64-w64-mingw32/include \
-	-I/FreeImage/Source \
-	-I/FreeImage/Source/ZLib \
-	-I/FreeImage/Source/OpenEXR \
-	-I/FreeImage/Source/OpenEXR/Half \
-	-I/FreeImage/Source/OpenEXR/Iex \
-	-I/FreeImage/Source/OpenEXR/IexMath \
-	-I/FreeImage/Source/OpenEXR/Imath \
-	-I/FreeImage/Source/OpenEXR/IlmImf \
-	-I/FreeImage/Source/OpenEXR/IlmThread \
-	-I/FreeImage/Source/LibJXR/jxrgluelib \
-	-I/FreeImage/Source/LibJXR/image/sys \
-	-I/FreeImage/Source/LibJXR/common/include \
-	-I/FreeImage/Source/LibRawLite
+INCLUDE += -I/usr/x86_64-w64-mingw32/include
 
 # Uncomment this variable to make a static library. This may
 # also be specified as an environment variable and can hold
@@ -30,12 +17,12 @@ INCLUDE= -I/usr/x86_64-w64-mingw32/include \
 # Default: SHARED
 FREEIMAGE_LIBRARY_TYPE = STATIC
 
-# Redefine the compiler (CC defaults to ?cc? for MinGW's make,
-# however there's only ?gcc? available with MinGW).
+# Redefine the compiler (CC defaults to cc for MinGW's make,
+# however there's only gcc available with MinGW).
 CC = x86_64-w64-mingw32-gcc
 
-# Redefine the linker (we use ?g++? for linking, since MinGW's
-# command ?ld? comes with wrong (Linux) standard library search
+# Redefine the linker (we use g++ for linking, since MinGW's
+# command ld comes with wrong (Linux) standard library search
 # paths).
 LD = x86_64-w64-mingw32-g++
 
@@ -45,13 +32,13 @@ DLLTOOL = x86_64-w64-mingw32-dlltool
 #Define the resource compiler.
 RC = x86_64-w64-mingw32-windres
 
-# Define the ?copy? command.
+# Define the copy command.
 CP = cp
 
-# Define the ?mkdir? command.
+# Define the mkdir command.
 MD = mkdir
 
-# Define the ?remove? command.
+# Define the remove command.
 RM = rm
 
 # Define additional libraries needed.
@@ -80,7 +67,7 @@ MODULES := $(MODULES:.cpp=.o)
 RESOURCE = $(RCFILE:.rc=.coff)
 CFLAGS ?= -O3 -fexceptions -DNDEBUG -DDISABLE_PERF_MEASUREMENT $(WIN32_CFLAGS) 
 CFLAGS += $(INCLUDE)
-CXXFLAGS ?= -O3 -fexceptions -Wno-ctor-dtor-privacy -DNDEBUG $(WIN32_CXXFLAGS) -fpermissive
+CXXFLAGS ?= -O3 -fexceptions -DNDEBUG -DDISABLE_PERF_MEASUREMENT $(WIN32_CXXFLAGS) -fpermissive -Wno-ctor-dtor-privacy 
 CXXFLAGS += $(INCLUDE)
 RCFLAGS ?= -DNDEBUG
 LDFLAGS ?= -s -shared -static -Wl,-soname,$(SOLIBNAME) $(WIN32_LDFLAGS)
@@ -105,13 +92,14 @@ LIB_TYPE_FLAGS = $(WIN32_$(FREEIMAGE_LIBRARY_TYPE)_FLAGS)
 
 default: all
 
-all: mkdist
+all: dist
 
 rebuild: clean all
 
-mkdist: FreeImage $(TARGETDIST)
-
-FreeImage: $(TARGETLIB)
+dist: $(TARGETLIB) 
+	$(MD) $(DISTDIR)
+	$(CP) *.a $(DISTDIR)
+	$(CP) Source/FreeImage.h $(DISTDIR)
 
 %.o: %.c
 	x86_64-w64-mingw32-gcc $(CFLAGS) -c $< -o $@
@@ -122,12 +110,6 @@ FreeImage: $(TARGETLIB)
 %.coff: %.rc
 	x86_64-w64-mingw32-windres $(RCFLAGS) -o $@ $<
 
-$(DISTDIR)/%: %
-	$(CP) $< $@
-
-$(DISTDIR)/%: $(SRCDIR)/%
-	$(CP) $< $@
-
 $(STATICLIB): $(MODULES)
 	x86_64-w64-mingw32-ar rs $@ $(MODULES)
 
@@ -136,14 +118,6 @@ $(IMPORTLIB) $(EXPORTLIB): $(MODULES)
 
 $(SHAREDLIB): $(EXPORTLIB) $(RESOURCE)
 	x86_64-w64-mingw32-g++ $(LDFLAGS) -o $@ $(EXPORTLIB) $(MODULES) $(RESOURCE) $(LIBRARIES)
-
-$(DISTDIR):
-	$(MD) $(DISTDIR)
-
-$(TARGETDIST): $(DISTDIR)
-
-install:
-	$(CP) $(SHAREDLIB) $(INSTALLDIR)
 
 clean:
 	$(RM) -f core $(DISTDIR)/*.* $(MODULES) $(RESOURCE) $(STATICLIB) $(SHAREDLIB) $(IMPORTLIB) $(EXPORTLIB)

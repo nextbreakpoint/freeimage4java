@@ -4,9 +4,8 @@
 include Makefile.srcs
 
 # General configuration variables:
-DESTDIR ?= /build
-INCDIR ?= /build
-INSTALLDIR ?= /build
+DESTDIR = Build
+INCDIR = Source
 
 # Converts cr/lf to just lf
 DOS2UNIX = dos2unix
@@ -15,9 +14,9 @@ LIBRARIES = -lstdc++
 
 MODULES = $(SRCS:.c=.o)
 MODULES := $(MODULES:.cpp=.o)
-CFLAGS ?= -O3 -fPIC -fexceptions -fvisibility=hidden -DNO_LCMS
+CFLAGS ?= -O3 -fPIC -fexceptions -fvisibility=hidden -D__ANSI__ -DPLATFORMANSI -DNO_LCMS -DDISABLE_PERF_MEASUREMENT
 CFLAGS += $(INCLUDE)
-CXXFLAGS ?= -O3 -fPIC -fexceptions -fvisibility=hidden -Wno-ctor-dtor-privacy
+CXXFLAGS ?= -O3 -fPIC -fexceptions -fvisibility=hidden -D__ANSI__ -DPLATFORMANSI -DNO_LCMS -DDISABLE_PERF_MEASUREMENT -Wno-ctor-dtor-privacy 
 CXXFLAGS += $(INCLUDE)
 
 ifeq ($(shell sh -c 'uname -m 2>/dev/null || echo not'),x86_64)
@@ -32,16 +31,23 @@ LIBNAME	= lib$(TARGET).so
 VERLIBNAME = $(LIBNAME).$(VER_MAJOR)
 HEADER = Source/FreeImage.h
 
+# Define the copy command.
+CP = cp
 
+# Define the mkdir command.
+MD = mkdir
+
+# Define the remove command.
+RM = rm
 
 default: all
 
 all: dist
 
 dist: FreeImage
-	cp *.a $(DESTDIR)
-	cp *.so $(DESTDIR)
-	cp Source/FreeImage.h $(DESTDIR)
+	$(MD) $(DISTDIR)
+	$(CP) *.a $(DESTDIR)
+	$(CP) Source/FreeImage.h $(DESTDIR)
 
 dos2unix:
 	@$(DOS2UNIX) $(SRCS) $(INCLS)
@@ -60,12 +66,6 @@ $(STATICLIB): $(MODULES)
 $(SHAREDLIB): $(MODULES)
 	$(CC) -shared -Wl,-soname,$(VERLIBNAME) $(LDFLAGS) -o $@ $(MODULES) $(LIBRARIES)
 
-install:
-	install -d $(INCDIR) $(INSTALLDIR)
-	install -m 644 -o root -g root $(HEADER) $(INCDIR)
-	install -m 644 -o root -g root $(STATICLIB) $(INSTALLDIR)
-	install -m 755 -o root -g root $(SHAREDLIB) $(INSTALLDIR)
-
 clean:
-	rm -f core $(DESTDIR)/*.* u2dtmp* $(MODULES) $(STATICLIB) $(SHAREDLIB) $(LIBNAME)
+	$(RM) -f core $(DESTDIR)/*.* u2dtmp* $(MODULES) $(STATICLIB) $(SHAREDLIB) $(LIBNAME)
 

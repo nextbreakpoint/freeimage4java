@@ -1,1 +1,4 @@
-docker run --name freeimage4java-linux --rm -i --volume=/Users/andrea/Documents/projects/Java/freeimage4java/build:/build --volume=/Users/andrea/Documents/projects/Java/freeimage4java/dist:/dist freeimage4java-linux
+mkdir -p build/linux
+mkdir -p dist/linux
+
+docker run --name freeimage4java-linux --rm -i --volume=build/linux:/build --volume=dist/linux:/dist freeimage4java-linux

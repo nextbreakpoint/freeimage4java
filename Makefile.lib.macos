@@ -5,16 +5,17 @@
 include Makefile.srcs
 
 # General configuration variables:
-CC_I386 = gcc
-CPP_I386 = g++
-COMPILERFLAGS = -Os -fexceptions -fvisibility=hidden -D__ANSI__ -DNO_LCMS -DDISABLE_PERF_MEASUREMENT
-COMPILERFLAGS_I386 = -arch x86_64
+DISTDIR = Build
+INCDIR = Source
+ARCH = x86_64
+CC = gcc
+CPP = g++
+COMPILERFLAGS = -Os -fexceptions -fvisibility=hidden -D__ANSI__ -DNO_LCMS -DDISABLE_PERF_MEASUREMENT -arch $(ARCH)
 COMPILERPPFLAGS = -Wno-ctor-dtor-privacy
-INCLUDE += 
-INCLUDE_I386 = -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk/
-CFLAGS_I386 = $(COMPILERFLAGS) $(COMPILERFLAGS_I386) $(INCLUDE) $(INCLUDE_I386)
-CPPFLAGS_I386 = $(COMPILERPPFLAGS) $(CFLAGS_I386)
-LIBRARIES_I386 = -Wl
+INCLUDE += -isysroot $(MACOS_SDK)
+CFLAGS = $(COMPILERFLAGS) $(INCLUDE)
+CPPFLAGS = $(COMPILERPPFLAGS) $(CFLAGS)
+LIBRARIES = -Wl
 LIBTOOL = libtool
 LIPO = lipo
 
@@ -24,48 +25,49 @@ SHAREDLIB = lib$(TARGET)-$(VER_MAJOR).$(VER_MINOR).dylib
 LIBNAME = lib$(TARGET).$(VER_MAJOR).dylib
 HEADER = Source/FreeImage.h
 
-.SUFFIXES: .o-i386
-MODULES_I386 = $(SRCS:.c=.o-i386)
-MODULES_I386 := $(MODULES_I386:.cpp=.o-i386)
+MACOS_SDK=/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk/
 
-INSTALLDIR = ../build
-DISTDIR = ../build
-INCDIR = ../build
+# Define the copy command.
+CP = cp
+
+# Define the mkdir command.
+MD = mkdir
+
+# Define the remove command.
+RM = rm
+
+.SUFFIXES: .o-$(ARCH)
+MODULES = $(SRCS:.c=.o-$(ARCH))
+MODULES := $(MODULES:.cpp=.o-$(ARCH))
 
 default: all
 
 all: dist
 
 dist: FreeImage
-	cp *.a $(DISTDIR)
-	cp Source/FreeImage.h $(DISTDIR)
+	$(MD) $(DISTDIR)
+	$(CP) *.a $(DISTDIR)
+	$(CP) Source/FreeImage.h $(DISTDIR)
 
 FreeImage: $(STATICLIB) 
 
-$(STATICLIB): $(STATICLIB)-i386
-	$(LIPO) -create $(STATICLIB)-i386 -output $(STATICLIB)
+$(STATICLIB): $(STATICLIB)-$(ARCH)
+	$(LIPO) -create $(STATICLIB)-$(ARCH) -output $(STATICLIB)
 
-$(STATICLIB)-i386: $(MODULES_I386)
-	$(LIBTOOL) -arch_only x86_64 -o $@ $(MODULES_I386)
+$(STATICLIB)-$(ARCH): $(MODULES)
+	$(LIBTOOL) -arch_only $(ARCH) -o $@ $(MODULES)
 
-$(SHAREDLIB): $(SHAREDLIB)-i386
-	$(LIPO) -create $(SHAREDLIB)-i386 -output $(SHAREDLIB)
+$(SHAREDLIB): $(SHAREDLIB)-$(ARCH)
+	$(LIPO) -create $(SHAREDLIB)-$(ARCH) -output $(SHAREDLIB)
 
-$(SHAREDLIB)-i386: $(MODULES_I386)
-	$(CPP_I386) -arch x86_64 -dynamiclib $(LIBRARIES_I386) -o $@ $(MODULES_I386)
+$(SHAREDLIB)-$(ARCH): $(MODULES)
+	$(CPP) -arch $(ARCH) -dynamiclib $(LIBRARIES) -o $@ $(MODULES)
 
-.c.o-i386:
-	$(CC_I386) $(CFLAGS_I386) -c $< -o $@
+.c.o-$(ARCH):
+	$(CC) $(CFLAGS) -c $< -o $@
 
-.cpp.o-i386:
-	$(CPP_I386) $(CPPFLAGS_I386) -c $< -o $@
-
-install:
-	install -d -m 755 -o root -g wheel $(INCDIR) $(INSTALLDIR)
-	install -m 644 -o root -g wheel $(HEADER) $(INCDIR)
-	install -m 644 -o root -g wheel $(SHAREDLIB) $(STATICLIB) $(INSTALLDIR)
-	ranlib -sf $(INSTALLDIR)/$(STATICLIB)
-	ln -sf $(SHAREDLIB) $(INSTALLDIR)/$(LIBNAME)
+.cpp.o-$(ARCH):
+	$(CPP) $(CPPFLAGS) -c $< -o $@
 
 clean:
-	rm -f core u2dtmp* $(MODULES_I386) $(STATICLIB) $(STATICLIB)-i386 $(SHAREDLIB) $(SHAREDLIB)-i386
+	$(RM) -f core u2dtmp* $(MODULES) $(STATICLIB) $(STATICLIB)-$(ARCH) $(SHAREDLIB) $(SHAREDLIB)-$(ARCH)

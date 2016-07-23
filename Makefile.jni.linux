@@ -1,25 +1,18 @@
-JAVA_HOME=/usr/lib/jvm/java-8-oracle
-FREEIMAGE_DIR=/FreeImage
-BUILD_DIR=/build
-DIST_DIR=/dist
+DIST_DIR?=Dist/linux
+BUILD_DIR=Build
 LIB_TYPE=64
 ARCH=x86_64
 LIB_ARCH=x86_$(LIB_TYPE)
+JAVA_HOME=/usr/lib/jvm/java-8-oracle
 
-build-wrapper: 
+all: 
 	mkdir -p $(BUILD_DIR)/$(LIB_ARCH)
-	cd $(BUILD_DIR) && mkdir -p src/com/nextbreakpoint/freeimage4java
-	cd $(BUILD_DIR) && mkdir -p bin/com/nextbreakpoint/freeimage4java
-	cd $(BUILD_DIR) && swig -v -c++ -java -outcurrentdir -outdir src/com/nextbreakpoint/freeimage4java -package com.nextbreakpoint.freeimage4java $(FREEIMAGE_DIR)/freeimage4java.i
-	cd $(BUILD_DIR) && g++ --verbose -o $(BUILD_DIR)/$(LIB_ARCH)/libfreeimage4java.dylib -L$(BUILD_DIR) -I$(BUILD_DIR) -I$(JAVA_HOME)/include -I$(JAVA_HOME)/include/linux -shared -fPIC -Wall -m$(LIB_TYPE) -DFREEIMAGE_LIB -lstdc++ -lm -lFreeImage freeimage4java_wrap.cxx 
-
-archive-wrapper:
+	mkdir -p $(BUILD_DIR)/src/com/nextbreakpoint/freeimage4java
+	mkdir -p $(BUILD_DIR)/bin/com/nextbreakpoint/freeimage4java
+	swig -v -c++ -java -outcurrentdir -outdir $(BUILD_DIR)/src/com/nextbreakpoint/freeimage4java -package com.nextbreakpoint.freeimage4java FreeImage/freeimage4java.i
+	g++ --verbose -o $(BUILD_DIR)/$(LIB_ARCH)/libfreeimage4java.so -L$(BUILD_DIR) -I$(BUILD_DIR) -I$(JAVA_HOME)/include -I$(JAVA_HOME)/include/linux -Wl,-soname,libfreeimage4java.so -shared -fPIC -Wall -m$(LIB_TYPE) -DFREEIMAGE_LIB -lstdc++ -lm -lfreeimage freeimage4java_wrap.cxx 
 	mkdir -p $(DIST_DIR)/$(LIB_ARCH)
 	cd $(BUILD_DIR)/src/com/nextbreakpoint/freeimage4java && $(JAVA_HOME)/bin/javac -verbose -d ../../../../bin *
 	cd $(BUILD_DIR) && $(JAVA_HOME)/bin/jar cvf freeimage4java.jar -C bin .
-	cd $(BUILD_DIR) && tar -cjf freeimage4java.tar.bz2 src/com/nextbreakpoint/freeimage4java
-	cp $(BUILD_DIR)/$(LIB_ARCH)/*.dylib $(DIST_DIR)/$(LIB_ARCH)
+	cp $(BUILD_DIR)/$(LIB_ARCH)/*.so $(DIST_DIR)/$(LIB_ARCH)
 	cp $(BUILD_DIR)/freeimage4java.jar $(DIST_DIR)
-	cp $(BUILD_DIR)/freeimage4java.tar.bz2 $(DIST_DIR)
-
-all: build-wrapper archive-wrapper

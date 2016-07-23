@@ -5,6 +5,7 @@ cvs -z3 -d:pserver:anonymous@freeimage.cvs.sourceforge.net:/cvsroot/freeimage co
 
 cp Makefile.lib.macos FreeImage
 cp Makefile.jni.macos FreeImage
+
 cp freeimage4java.i FreeImage
 
 patch -p0 < macos.patch
