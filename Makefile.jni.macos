@@ -10,10 +10,10 @@ all:
 	mkdir -p $(BUILD_DIR)/src/com/nextbreakpoint/freeimage4java
 	mkdir -p $(BUILD_DIR)/bin/com/nextbreakpoint/freeimage4java
 	swig -v -c++ -java -outcurrentdir -outdir $(BUILD_DIR)/src/com/nextbreakpoint/freeimage4java -package com.nextbreakpoint.freeimage4java freeimage4java.i
-	g++ --verbose -o $(BUILD_DIR)/$(LIB_ARCH)/freeimage4java.dylib -I$(BUILD_DIR) -L$(BUILD_DIR) -I$(JAVA_HOME)/include -I$(JAVA_HOME)/include/darwin -shared -fPIC -Wall -m$(LIB_TYPE) -DFREEIMAGE_LIB -lfreeimage -lm freeimage4java_wrap.cxx
+	g++ --verbose -o $(BUILD_DIR)/$(LIB_ARCH)/libfreeimage4java.jnilib -I$(BUILD_DIR) -L$(BUILD_DIR) -I$(JAVA_HOME)/include -I$(JAVA_HOME)/include/darwin -shared -fPIC -Wall -m$(LIB_TYPE) -DFREEIMAGE_LIB -lfreeimage -lm freeimage4java_wrap.cxx
 	mkdir -p $(DIST_DIR)/$(LIB_ARCH)
 	cd $(BUILD_DIR)/src/com/nextbreakpoint/freeimage4java && $(JAVA_HOME)/bin/javac -verbose -d ../../../../bin *
 	cd $(BUILD_DIR) && $(JAVA_HOME)/bin/jar cvf freeimage4java.jar -C bin .
-	cp $(BUILD_DIR)/$(LIB_ARCH)/*.dylib $(DIST_DIR)/$(LIB_ARCH)
+	cp $(BUILD_DIR)/$(LIB_ARCH)/*.jnilib $(DIST_DIR)/$(LIB_ARCH)
 	cp $(BUILD_DIR)/freeimage4java.jar $(DIST_DIR)
 
