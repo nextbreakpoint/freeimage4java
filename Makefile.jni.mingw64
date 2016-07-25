@@ -1,18 +1,7 @@
-DIST_DIR?=Dist/win32
-BUILD_DIR=Build
+BUILD_DIR?=Build
 LIB_TYPE=64
-ARCH=x86_64
 LIB_ARCH=x86_$(LIB_TYPE)
 JAVA_HOME=/usr/lib/jvm/java-8-oracle
 
 all: 
-	mkdir -p $(BUILD_DIR)/$(LIB_ARCH)
-	mkdir -p $(BUILD_DIR)/src/com/nextbreakpoint/freeimage4java
-	mkdir -p $(BUILD_DIR)/bin/com/nextbreakpoint/freeimage4java
-	swig -v -c++ -java -outcurrentdir -outdir $(BUILD_DIR)/src/com/nextbreakpoint/freeimage4java -package com.nextbreakpoint.freeimage4java freeimage4java.i
-	x86_64-w64-mingw32-g++ --verbose -o $(BUILD_DIR)/$(LIB_ARCH)/freeimage4java.dll -L$(BUILD_DIR) -I$(BUILD_DIR) -I$(JAVA_HOME)/include -I$(JAVA_HOME)/include/linux -Wl,--out-implib=libfreeimage4java.dll.a -Wl,-add-stdcall-alias -shared -fPIC -Wall -m$(LIB_TYPE) -DFREEIMAGE_LIB freeimage4java_wrap.cxx -lFreeImage -lm -lws2_32 
-	mkdir -p $(DIST_DIR)/$(LIB_ARCH)
-	cd $(BUILD_DIR)/src/com/nextbreakpoint/freeimage4java && $(JAVA_HOME)/bin/javac -verbose -d ../../../../bin *
-	cd $(BUILD_DIR) && $(JAVA_HOME)/bin/jar cvf freeimage4java.jar -C bin .
-	cp $(BUILD_DIR)/$(LIB_ARCH)/*.dll $(DIST_DIR)/$(LIB_ARCH)
-	cp $(BUILD_DIR)/freeimage4java.jar $(DIST_DIR)
+	mkdir -p $(BUILD_DIR)/win32/$(LIB_ARCH) && x86_64-w64-mingw32-g++ --verbose -o $(BUILD_DIR)/win32/$(LIB_ARCH)/freeimage4java.dll -L. -ISource -I$(JAVA_HOME)/include -I$(JAVA_HOME)/include/linux -Wl,--out-implib=libfreeimage4java.dll.a -Wl,-add-stdcall-alias -shared -fPIC -Wall -m$(LIB_TYPE) -DFREEIMAGE_LIB $(BUILD_DIR)/freeimage4java_wrap.cxx -lFreeImage -lm -lws2_32 

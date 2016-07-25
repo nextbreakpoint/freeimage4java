@@ -4,7 +4,7 @@
 include Makefile.srcs
 
 # General configuration variables:
-DISTDIR = Build
+DISTDIR ?= Dist
 INCDIR = Source
 
 # Converts cr/lf to just lf

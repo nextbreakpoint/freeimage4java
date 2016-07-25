@@ -1,18 +1,7 @@
-DIST_DIR?=Dist/linux
-BUILD_DIR=Build
+BUILD_DIR?=Build
 LIB_TYPE=64
-ARCH=x86_64
 LIB_ARCH=x86_$(LIB_TYPE)
 JAVA_HOME=/usr/lib/jvm/java-8-oracle
 
-all: 
-	mkdir -p $(BUILD_DIR)/$(LIB_ARCH)
-	mkdir -p $(BUILD_DIR)/src/com/nextbreakpoint/freeimage4java
-	mkdir -p $(BUILD_DIR)/bin/com/nextbreakpoint/freeimage4java
-	swig -v -c++ -java -outcurrentdir -outdir $(BUILD_DIR)/src/com/nextbreakpoint/freeimage4java -package com.nextbreakpoint.freeimage4java freeimage4java.i
-	g++ --verbose -o $(BUILD_DIR)/$(LIB_ARCH)/libfreeimage4java.so -L$(BUILD_DIR) -I$(BUILD_DIR) -I$(JAVA_HOME)/include -I$(JAVA_HOME)/include/linux -Wl,-soname,libfreeimage4java.so -shared -fPIC -Wall -m$(LIB_TYPE) -DFREEIMAGE_LIB -lstdc++ -lm -lfreeimage freeimage4java_wrap.cxx 
-	mkdir -p $(DIST_DIR)/$(LIB_ARCH)
-	cd $(BUILD_DIR)/src/com/nextbreakpoint/freeimage4java && $(JAVA_HOME)/bin/javac -verbose -d ../../../../bin *
-	cd $(BUILD_DIR) && $(JAVA_HOME)/bin/jar cvf freeimage4java.jar -C bin .
-	cp $(BUILD_DIR)/$(LIB_ARCH)/*.so $(DIST_DIR)/$(LIB_ARCH)
-	cp $(BUILD_DIR)/freeimage4java.jar $(DIST_DIR)
+all: 	
+	mkdir -p $(BUILD_DIR)/linux/$(LIB_ARCH) && g++ --verbose -o $(BUILD_DIR)/linux/$(LIB_ARCH)/libfreeimage4java.so -L. -ISource -I$(JAVA_HOME)/include -I$(JAVA_HOME)/include/linux -Wl,-soname,libfreeimage4java.so -shared -fPIC -Wall -m$(LIB_TYPE) -DFREEIMAGE_LIB -lstdc++ -lm -lfreeimage $(BUILD_DIR)/freeimage4java_wrap.cxx 
