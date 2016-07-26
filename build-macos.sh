@@ -5,11 +5,13 @@ rm -fR FreeImage
 
 cvs -z3 -d:pserver:anonymous@freeimage.cvs.sourceforge.net:/cvsroot/freeimage co -P FreeImage
 
-cp Makefile.lib.macos FreeImage/
+cp Makefile.lib.macos FreeImage/Makefile.lib.macos
 
-cp Makefile.jni.macos FreeImage/
+cp Makefile.jni.macos FreeImage/Makefile.jni.macos
 
-patch -p0 < macos.patch
+cp macos.patch FreeImage/macos.patch
+
+patch -p0 < FreeImage/macos.patch
 
 cd FreeImage
 
