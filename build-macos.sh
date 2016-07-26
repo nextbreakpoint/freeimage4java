@@ -13,7 +13,6 @@ patch -p0 < macos.patch
 
 cd FreeImage
 
-export DISTDIR=$BUILD_DIR/macos
-make -f Makefile.lib.macos all
+make -f Makefile.lib.macos FreeImage
 
 make -f Makefile.jni.macos all

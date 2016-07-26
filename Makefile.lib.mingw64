@@ -96,7 +96,7 @@ all: dist
 
 rebuild: clean all
 
-dist: $(TARGETLIB) 
+dist: FreeImage
 	$(MD) $(DISTDIR)
 	$(CP) *.a $(DISTDIR)
 	$(CP) Source/FreeImage.h $(DISTDIR)
@@ -109,6 +109,8 @@ dist: $(TARGETLIB)
 
 %.coff: %.rc
 	x86_64-w64-mingw32-windres $(RCFLAGS) -o $@ $<
+
+FreeImage: $(STATICLIB) 
 
 $(STATICLIB): $(MODULES)
 	x86_64-w64-mingw32-ar rs $@ $(MODULES)
