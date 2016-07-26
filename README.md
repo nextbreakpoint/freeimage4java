@@ -2,6 +2,7 @@
 
 FreeImage for Java provides a JNI wrapper of FreeImage library version 3.18.0.
 
+
 ## License
 
 FreeImage for Java is distributed under the terms of BSD 3-Clause License.
@@ -34,27 +35,54 @@ FreeImage for Java is distributed under the terms of BSD 3-Clause License.
     OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
     OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-# Build for MacOS
 
-We recommend to use brew for installing required tools.
+## Generate JNI wrapper's code
+
+We use docker for generating wrapper's code.
+
+Install docker on your system.
+
+Execute script to create base image:
+
+  sh create-image-base.sh
+
+Execute script to create image for generating code:
+
+  sh create-image-java.sh
+
+Execute script to run a container from the image:
+
+  sh run-image-java.sh
+
+The output will be produced in directory build and build/java
+
+
+## Build library for MacOS
+
+  Generate wrapper's code before compiling the library for MacOS.
+
+Download and install command line tools from Apple Developer Center.
+
+  We recommend using brew for installing required tools on MacOS.
 
 Install Swig version 3.0.8: 
 
-	brew install swig
+	brew install swig 
 
-Install command line tools for Xcode from Apple Developer Center.
+  apt install swig 
 
 Execute build script:
 
 	sh build-macos.sh
 
-# Build for Linux
+The native library will be created in directory build/macos
 
-We recommend to use docker for creating a container with required tools.
 
-Install docker on your system (Linux or MacOS).
+## Build library for Linux
 
-Execute script to create the image:
+  Generate wrapper's code before compiling the library for Linux.
+
+Execute script to create image for building library:
 
 	sh create-image-linux.sh
 
@@ -62,16 +90,39 @@ Execute script to run a container from the image:
 
 	sh run-image-linux.sh
 
-# Build for Windows (cross-compilation)
+The native library will be created in directory build/linux
 
-We recommend to use docker for creating a container with required tools for cross-compiling using Mingw-w64.
 
-Install docker on your system (Linux or MacOS).
+## Build library for Windows (cross-compilation)
 
-Execute script to create the image:
+  Generate wrapper's code before compiling the library for Windows.
+
+We use Mingw-w64 for cross-compiling the native code.
+
+Execute script to create image for building library:
 
 	sh create-image-mingw64.sh
 
 Execute script to run a container from the image:
 
 	sh run-image-mingw64.sh
+
+The native library will be created in directory build/win32
+
+
+## Create artifacts 
+
+  Generate wrapper's code and build libraries before creating artifacts
+
+Install Maven version 3.x:
+
+  brew install maven
+
+  apt install maven 
+
+Execute script to create packages:
+
+  sh build-wrapper.sh
+
+The packages will be created in directory build/target
+
