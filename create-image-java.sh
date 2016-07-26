@@ -1,1 +1,1 @@
-docker build -t freeimage4java -f Dockerfile.java .
+docker build -t freeimage4java-java -f Dockerfile.java .

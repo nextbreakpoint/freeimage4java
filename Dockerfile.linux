@@ -1,19 +1,6 @@
-FROM ubuntu:latest
+FROM freeimage4java:latest
 
-RUN apt-get update && apt-get -y install sudo apt-utils git
-
-RUN apt-get update && apt-get -y install cvs make gcc
-
-RUN apt-get update && apt-get -y install gcc g++
-
-RUN apt-get update && apt-get -y install software-properties-common python-software-properties
-
-RUN add-apt-repository -y ppa:webupd8team/java
-
-RUN echo debconf shared/accepted-oracle-license-v1-1 select true | debconf-set-selections
-RUN echo debconf shared/accepted-oracle-license-v1-1 seen true | debconf-set-selections
-
-RUN apt-get update && apt-get install -y oracle-java8-installer oracle-java8-set-default
+RUN apt-get update && apt-get -y install cvs make gcc g++
 
 RUN cvs -z3 -d:pserver:anonymous@freeimage.cvs.sourceforge.net:/cvsroot/freeimage co -P FreeImage
 
