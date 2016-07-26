@@ -36,11 +36,11 @@ FreeImage for Java is distributed under the terms of BSD 3-Clause License.
     OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
-## Generate JNI wrapper's code
+## Generate JNI library's code
 
-We use docker for generating wrapper's code.
+We use docker for generating JNI library's code.
 
-Install docker on your system.
+  Before you continue install docker on your system.
 
 Execute script to create base image:
 
@@ -54,22 +54,14 @@ Execute script to run a container from the image:
 
   sh run-image-java.sh
 
-The output will be produced in directory build and build/java
+The output will be produced in directory build.
 
 
 ## Build library for MacOS
 
-  Generate wrapper's code before compiling the library for MacOS.
-
 Download and install command line tools from Apple Developer Center.
 
-  We recommend using brew for installing required tools on MacOS.
-
-Install Swig version 3.0.8: 
-
-	brew install swig 
-
-  apt install swig 
+  Generate wrapper's code before compiling library for MacOS.
 
 Execute build script:
 
@@ -80,7 +72,9 @@ The native library will be created in directory build/macos
 
 ## Build library for Linux
 
-  Generate wrapper's code before compiling the library for Linux.
+We use docker for compiling Linux library.
+
+  Generate wrapper's code before compiling library for Linux.
 
 Execute script to create image for building library:
 
@@ -95,9 +89,9 @@ The native library will be created in directory build/linux
 
 ## Build library for Windows (cross-compilation)
 
-  Generate wrapper's code before compiling the library for Windows.
+We use docker for cross-compiling Windows library using Mingw-w64.
 
-We use Mingw-w64 for cross-compiling the native code.
+  Generate wrapper's code before compiling library for Windows.
 
 Execute script to create image for building library:
 
@@ -112,17 +106,18 @@ The native library will be created in directory build/win32
 
 ## Create artifacts 
 
-  Generate wrapper's code and build libraries before creating artifacts
+We use Apache Maven to compile Java code and package the artifacts.
+
+  Generate wrapper's code and build libraries before creating artifacts.
 
 Install Maven version 3.x:
 
-  brew install maven
-
   apt install maven 
+
+  brew install maven
 
 Execute script to create packages:
 
   sh build-wrapper.sh
 
 The packages will be created in directory build/target
-
