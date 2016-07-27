@@ -2,10 +2,10 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.nextbreakpoint</groupId>
-	<artifactId>com.nextbreakpoint.freeimage4javatests</artifactId>
+	<artifactId>com.nextbreakpoint.freeimage4java.tests</artifactId>
 	<version>1.0.0</version>
 	<packaging>jar</packaging>
-	<name>FreeImage for Java Tests</name>
+	<name>FreeImage for Java - Tests</name>
 	<description>FreeImage for Java provides a JNI wrapper of FreeImage library</description>
 	<url>https://github.com/nextbreakpoint/freeimage4java</url>
 	<licenses>
@@ -47,6 +47,7 @@
 					<includes>
 						<include>**/*.java</include>
 					</includes>
+					<argLine>-Djava.library.path=${project.build.directory}/lib/${os.type}</argLine>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -55,20 +56,8 @@
 				<version>2.8</version>
 				<executions>
 					<execution>
-						<id>copy-jars</id>
-						<phase>package</phase>
-						<goals>
-							<goal>copy-dependencies</goal>
-						</goals>
-						<configuration>
-							<includeGroupIds>com.nextbreakpoint</includeGroupIds>
-							<excludeArtifactIds>com.nextbreakpoint.freeimage4java.native</excludeArtifactIds>
-							<outputDirectory>${project.build.directory}/jars/</outputDirectory>
-						</configuration>
-					</execution>
-					<execution>
 						<id>copy-lib</id>
-						<phase>package</phase>
+						<phase>compile</phase>
 						<goals>
 							<goal>unpack</goal>
 						</goals>
@@ -76,12 +65,12 @@
 							<artifactItems>
 								<artifactItem>
 									<groupId>com.nextbreakpoint</groupId>
-									<artifactId>com.nextbreakpoint.freeimage4java.native</artifactId>
-									<version>0.1.1</version>
+									<artifactId>com.nextbreakpoint.freeimage4java</artifactId>
+									<version>1.0.0</version>
 									<classifier>${build.type}</classifier>
 									<type>jar</type>
 									<overWrite>true</overWrite>
-									<outputDirectory>${project.build.directory}/lib/${os.type}/${arch.type}</outputDirectory>
+									<outputDirectory>${project.build.directory}/lib</outputDirectory>
 								</artifactItem>
 							</artifactItems>
 						</configuration>
@@ -105,7 +94,7 @@
 	</dependencies>
 	<profiles>
 		<profile>
-			<id>win32_x86_64</id>
+			<id>win32</id>
 			<properties>
 				<build.type>win32_x86_64</build.type>
 				<arch.type>x86_64</arch.type>
@@ -113,7 +102,7 @@
 			</properties>
 		</profile>
 		<profile>
-			<id>linux_x86_64</id>
+			<id>linux</id>
 			<properties>
 				<build.type>linux_x86_64</build.type>
 				<arch.type>x86_64</arch.type>
@@ -121,14 +110,14 @@
 			</properties>
 		</profile>
 		<profile>
-			<id>macosx_x86_64</id>
+			<id>macos</id>
 			<activation>
 				<activeByDefault>true</activeByDefault>
 			</activation>
 			<properties>
-				<build.type>macosx_x86_64</build.type>
+				<build.type>macos_x86_64</build.type>
 				<arch.type>x86_64</arch.type>
-				<os.type>macosx</os.type>
+				<os.type>macos</os.type>
 			</properties>
 		</profile>
 	</profiles>

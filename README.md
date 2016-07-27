@@ -54,7 +54,9 @@ Execute script to run a container from the image:
 
   sh run-image-java.sh
 
-The output will be produced in directory build/freeimage4java/java.
+The output will be produced in directory:
+
+  build/com.nextbreakpoint.freeimage4java/src/main/java
 
 
 ## Build library for MacOS
@@ -67,7 +69,9 @@ Execute build script:
 
 	sh build-macos.sh
 
-The native library will be created in directory build/freeimage4java/macos.
+The native library will be created in directory:
+
+  build/com.nextbreakpoint.freeimage4java/src/main/resources/macos
 
 
 ## Build library for Linux
@@ -84,7 +88,9 @@ Execute script to run a container from the image:
 
 	sh run-image-linux.sh
 
-The native library will be created in directory build/freeimage4java/linux.
+The native library will be created in directory:
+
+  build/com.nextbreakpoint.freeimage4java/src/main/resources/linux
 
 
 ## Build library for Windows (cross-compilation)
@@ -101,7 +107,9 @@ Execute script to run a container from the image:
 
 	sh run-image-mingw64.sh
 
-The native library will be created in directory build/freeimage4java/win32.
+The native library will be created in directory:
+
+  build/com.nextbreakpoint.freeimage4java/src/main/resources/win32
 
 
 ## Create artifacts 
@@ -112,19 +120,29 @@ We use Apache Maven to compile Java code and package the artifacts.
 
 Execute script to create artifacts:
 
-  sh package.sh
+  sh mvn-package.sh
 
-The packages will be created in directory build/target
+The artifacts will be created in directory:
+
+  build/com.nextbreakpoint.freeimage4java/target
 
 Execute script to install artifacts:
 
-  sh install.sh
+  sh mvn-install.sh
 
-The artifacts will be created in target subdirectories of build/freeimage4java.
+The artifacts will be installed in local maven repository (~/.m2/repository).
 
 
 ## Run tests
 
-Execute script to run tests:
+Execute script to run tests on MacOS:
 
-  sh run-tests.sh
+  sh run-tests.sh -Pmacos
+
+Execute script to run tests on Linux:
+
+  sh run-tests.sh -Plinux
+
+Execute script to run tests on Windows:
+
+  sh run-tests.sh -Pwin32
