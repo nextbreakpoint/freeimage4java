@@ -3,4 +3,4 @@ build
 dist
 FreeImage
 .idea
-.iml
+*.iml
