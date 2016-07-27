@@ -1,7 +1,7 @@
 BUILD_DIR?=Build
 LIB_TYPE=64
 LIB_ARCH=x86_$(LIB_TYPE)
-JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_51.jdk/Contents/Home
+JAVA_HOME=`/usr/libexec/java_home`
 OUTPUT_DIR=$(BUILD_DIR)/com.nextbreakpoint.freeimage4java/src/main/resources/macos
 
 all:
