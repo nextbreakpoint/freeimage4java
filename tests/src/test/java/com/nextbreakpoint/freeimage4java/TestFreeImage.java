@@ -1,7 +1,12 @@
 package com.nextbreakpoint.freeimage4java;
 
+import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
+
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
@@ -21,6 +26,15 @@ public class TestFreeImage {
     @BeforeClass
     public static void setup() {
         pixels = createRandomPixels(IMAGE_WIDTH, IMAGE_HEIGHT);
+    }
+
+    @AfterClass
+    public static void clean() {
+        try {
+            Files.delete(new File("test.png").toPath());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Test
