@@ -114,7 +114,7 @@ The native library will be created in directory:
 
 ## Create artifacts 
 
-We use Apache Maven to compile Java code and package the artifacts.
+We use Apache Maven to compile and package the artifacts.
 
     Generate wrapper's code and build libraries before creating artifacts.
 
@@ -135,14 +135,18 @@ The artifacts will be installed in local maven repository (~/.m2/repository).
 
 ## Run tests
 
-Execute script to run tests on MacOS:
+We use Apache Maven to run the tests.
+
+    Install artifacts in local repository before running tests.
+
+Run tests on MacOS:
 
     sh run-tests.sh -Pmacos
 
-Execute script to run tests on Linux:
+Run tests on Linux:
 
     sh run-tests.sh -Plinux
 
-Execute script to run tests on Windows:
+Run tests on Windows:
 
     sh run-tests.sh -Pwin32
