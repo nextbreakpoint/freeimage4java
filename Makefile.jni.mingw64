@@ -2,6 +2,7 @@ BUILD_DIR?=Build
 LIB_TYPE=64
 LIB_ARCH=x86_$(LIB_TYPE)
 JAVA_HOME=/usr/lib/jvm/java-8-oracle
+OUTPUT_DIR=$(BUILD_DIR)/freeimage4java/win32/src/main/resources
 
 all: 
-	mkdir -p $(BUILD_DIR)/win32/$(LIB_ARCH) && x86_64-w64-mingw32-g++ --verbose -o $(BUILD_DIR)/win32/$(LIB_ARCH)/freeimage4java.dll -L. -ISource -I$(JAVA_HOME)/include -I$(JAVA_HOME)/include/linux -Wl,--out-implib=libfreeimage4java.dll.a -Wl,-add-stdcall-alias -shared -fPIC -Wall -m$(LIB_TYPE) -DFREEIMAGE_LIB $(BUILD_DIR)/freeimage4java_wrap.cxx -lFreeImage -lm -lws2_32 
+	mkdir -p $(OUTPUT_DIR) && x86_64-w64-mingw32-g++ --verbose -o $(OUTPUT_DIR)/freeimage4java.dll -L. -ISource -I$(JAVA_HOME)/include -I$(JAVA_HOME)/include/linux -Wl,--out-implib=libfreeimage4java.dll.a -Wl,-add-stdcall-alias -shared -fPIC -Wall -m$(LIB_TYPE) -DFREEIMAGE_LIB $(BUILD_DIR)/freeimage4java_wrap.cxx -lFreeImage -lm -lws2_32 

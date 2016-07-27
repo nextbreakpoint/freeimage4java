@@ -2,3 +2,5 @@
 build
 dist
 FreeImage
+.idea
+.iml

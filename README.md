@@ -54,7 +54,7 @@ Execute script to run a container from the image:
 
   sh run-image-java.sh
 
-The output will be produced in directory build.
+The output will be produced in directory build/freeimage4java/java.
 
 
 ## Build library for MacOS
@@ -67,7 +67,7 @@ Execute build script:
 
 	sh build-macos.sh
 
-The native library will be created in directory build/macos
+The native library will be created in directory build/freeimage4java/macos.
 
 
 ## Build library for Linux
@@ -84,7 +84,7 @@ Execute script to run a container from the image:
 
 	sh run-image-linux.sh
 
-The native library will be created in directory build/linux
+The native library will be created in directory build/freeimage4java/linux.
 
 
 ## Build library for Windows (cross-compilation)
@@ -101,7 +101,7 @@ Execute script to run a container from the image:
 
 	sh run-image-mingw64.sh
 
-The native library will be created in directory build/win32
+The native library will be created in directory build/freeimage4java/win32.
 
 
 ## Create artifacts 
@@ -110,14 +110,21 @@ We use Apache Maven to compile Java code and package the artifacts.
 
   Generate wrapper's code and build libraries before creating artifacts.
 
-Install Maven version 3.x:
+Execute script to create artifacts:
 
-  apt install maven 
-
-  brew install maven
-
-Execute script to create packages:
-
-  sh build-wrapper.sh
+  sh package.sh
 
 The packages will be created in directory build/target
+
+Execute script to install artifacts:
+
+  sh install.sh
+
+The artifacts will be created in target subdirectories of build/freeimage4java.
+
+
+## Run tests
+
+Execute script to run tests:
+
+  sh run-tests.sh

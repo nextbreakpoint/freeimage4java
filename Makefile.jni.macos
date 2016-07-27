@@ -2,7 +2,8 @@ BUILD_DIR?=Build
 LIB_TYPE=64
 LIB_ARCH=x86_$(LIB_TYPE)
 JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_51.jdk/Contents/Home
+OUTPUT_DIR=$(BUILD_DIR)/freeimage4java/macos/src/main/resources
 
 all:
-	mkdir -p $(BUILD_DIR)/macos/$(LIB_ARCH) && g++ --verbose -o $(BUILD_DIR)/macos/$(LIB_ARCH)/libfreeimage4java.jnilib -ISource -L. -I$(JAVA_HOME)/include -I$(JAVA_HOME)/include/darwin -shared -fPIC -Wall -m$(LIB_TYPE) -DFREEIMAGE_LIB -lfreeimage -lm $(BUILD_DIR)/freeimage4java_wrap.cxx
+	mkdir -p $(OUTPUT_DIR) && g++ --verbose -o $(OUTPUT_DIR)/libfreeimage4java.jnilib -ISource -L. -I$(JAVA_HOME)/include -I$(JAVA_HOME)/include/darwin -shared -fPIC -Wall -m$(LIB_TYPE) -DFREEIMAGE_LIB -lfreeimage -lm $(BUILD_DIR)/freeimage4java_wrap.cxx
 	

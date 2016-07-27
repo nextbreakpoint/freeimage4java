@@ -2,6 +2,7 @@ BUILD_DIR?=Build
 LIB_TYPE=64
 LIB_ARCH=x86_$(LIB_TYPE)
 JAVA_HOME=/usr/lib/jvm/java-8-oracle
+OUTPUT_DIR=$(BUILD_DIR)/freeimage4java/linux/src/main/resources
 
 all: 	
-	mkdir -p $(BUILD_DIR)/linux/$(LIB_ARCH) && g++ --verbose -o $(BUILD_DIR)/linux/$(LIB_ARCH)/libfreeimage4java.so -L. -ISource -I$(JAVA_HOME)/include -I$(JAVA_HOME)/include/linux -Wl,-soname,libfreeimage4java.so -shared -fPIC -Wall -m$(LIB_TYPE) -DFREEIMAGE_LIB -lstdc++ -lm -lfreeimage $(BUILD_DIR)/freeimage4java_wrap.cxx 
+	mkdir -p $(OUTPUT_DIR) && g++ --verbose -o $(OUTPUT_DIR)/libfreeimage4java.so -L. -ISource -I$(JAVA_HOME)/include -I$(JAVA_HOME)/include/linux -Wl,-soname,libfreeimage4java.so -shared -fPIC -Wall -m$(LIB_TYPE) -DFREEIMAGE_LIB -lstdc++ -lm -lfreeimage $(BUILD_DIR)/freeimage4java_wrap.cxx 
