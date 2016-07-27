@@ -42,21 +42,25 @@ We use docker for generating JNI library's code.
 
     Before you continue install docker on your system.
 
-Execute script to create base image:
+Create base image:
 
     sh create-image-base.sh
 
-Execute script to create image for generating code:
+Create image for generating code:
 
     sh create-image-java.sh
 
-Execute script to run a container from the image:
+Run a container from the image:
 
     sh run-image-java.sh
 
-The output will be produced in directory:
+The Java code will be generated in directory:
 
     build/com.nextbreakpoint.freeimage4java/src/main/java
+
+The JNI code will be generated in file:
+
+    build/freeimage4java_wrap.cxx
 
 
 ## Build library for MacOS
@@ -80,11 +84,11 @@ We use docker for compiling Linux library.
 
     Generate wrapper's code before compiling library for Linux.
 
-Execute script to create image for building library:
+Create image for building library:
 
     sh create-image-linux.sh
 
-Execute script to run a container from the image:
+Run a container from the image:
 
     sh run-image-linux.sh
 
@@ -99,11 +103,11 @@ We use docker for cross-compiling Windows library using Mingw-w64.
 
     Generate wrapper's code before compiling library for Windows.
 
-Execute script to create image for building library:
+Create image for building library:
 
     sh create-image-mingw64.sh
 
-Execute script to run a container from the image:
+Run a container from the image:
 
     sh run-image-mingw64.sh
 
@@ -112,13 +116,13 @@ The native library will be created in directory:
     build/com.nextbreakpoint.freeimage4java/src/main/resources/win32
 
 
-## Create artifacts 
+## Create and install artifacts 
 
 We use Apache Maven to compile and package the artifacts.
 
     Generate wrapper's code and build libraries before creating artifacts.
 
-Execute script to create artifacts:
+Create artifacts:
 
     sh mvn-package.sh
 
@@ -126,7 +130,7 @@ The artifacts will be created in directory:
 
     build/com.nextbreakpoint.freeimage4java/target
 
-Execute script to install artifacts:
+Install artifacts:
 
     sh mvn-install.sh
 
