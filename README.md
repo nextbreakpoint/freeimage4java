@@ -38,10 +38,12 @@ FreeImage for Java is distributed under the terms of BSD 3-Clause License.
 
 ## Notice
 
-This software uses the FreeImage open source image library. See http://freeimage.sourceforge.net for details.
-FreeImage is used under the FIPL, version 1.0.
+FreeImage for Java uses the FreeImage open source image library. 
+See http://freeimage.sourceforge.net for details.
 
-FreeImage library is statically linked with JNI code and distributed as single binary.
+    FreeImage library is statically linked with JNI code and distributed as single binary.
+
+FreeImage is used under the FIPL, version 1.0.
 
 
 ## Generate JNI code
