@@ -43,7 +43,7 @@ See http://freeimage.sourceforge.net for details.
 
     FreeImage library is statically linked with JNI code and distributed as single binary
 
-FreeImage is used under the FIPL, version 1.0.
+FreeImage is used under the FreeImage Public License, version 1.0.
 
 
 ## Generate JNI code
