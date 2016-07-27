@@ -36,11 +36,11 @@ FreeImage for Java is distributed under the terms of BSD 3-Clause License.
     OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
-## Generate JNI library's code
+## Generate JNI code
 
-We use docker for generating JNI library's code.
+We use docker for generating JNI code.
 
-    Before you continue install docker on your system.
+    Before you continue install docker on your system
 
 Create base image:
 
@@ -67,7 +67,7 @@ The JNI code will be generated in file:
 
 Download and install command line tools from Apple Developer Center.
 
-    Generate wrapper's code before compiling library for MacOS.
+    Generate JNI code before compiling library for MacOS
 
 Execute build script:
 
@@ -82,7 +82,7 @@ The native library will be created in directory:
 
 We use docker for compiling Linux library.
 
-    Generate wrapper's code before compiling library for Linux.
+    Generate JNI code before compiling library for Linux
 
 Create image for building library:
 
@@ -101,7 +101,7 @@ The native library will be created in directory:
 
 We use docker for cross-compiling Windows library using Mingw-w64.
 
-    Generate wrapper's code before compiling library for Windows.
+    Generate JNI code before compiling library for Windows
 
 Create image for building library:
 
@@ -120,7 +120,7 @@ The native library will be created in directory:
 
 We use Apache Maven to compile and package the artifacts.
 
-    Generate wrapper's code and build libraries before creating artifacts.
+    Generate JNI code and build libraries before creating artifacts
 
 Create artifacts:
 
@@ -141,7 +141,7 @@ The artifacts will be installed in local maven repository (~/.m2/repository).
 
 We use Apache Maven to run the tests.
 
-    Install artifacts in local repository before running tests.
+    Install artifacts in local repository before running tests
 
 Run tests on MacOS:
 
