@@ -1,6 +1,6 @@
 # freeimage4java
 
-FreeImage for Java provides a JNI wrapper of FreeImage library version 3.18.0.
+FreeImage for Java provides a JNI wrapper of FreeImage library.
 
 
 ## License
