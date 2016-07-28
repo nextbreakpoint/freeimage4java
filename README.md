@@ -1,11 +1,11 @@
 # freeimage4java
 
-FreeImage for Java provides a JNI wrapper of FreeImage library.
+freeimage4java provides a JNI wrapper of FreeImage library.
 
 
 ## License
 
-FreeImage for Java is distributed under the terms of BSD 3-Clause License.
+freeimage4java is distributed under the terms of BSD 3-Clause License.
 
     Copyright (c) 2016, Andrea Medeghini
     All rights reserved.
@@ -20,7 +20,7 @@ FreeImage for Java is distributed under the terms of BSD 3-Clause License.
         this list of conditions and the following disclaimer in the documentation
         and/or other materials provided with the distribution.
     
-    * Neither the name of FreeImage for Java (or freeimage4java) nor the names of its
+    * Neither the name of freeimage4java nor the names of its
         contributors may be used to endorse or promote products derived from
         this software without specific prior written permission.
     
@@ -38,7 +38,7 @@ FreeImage for Java is distributed under the terms of BSD 3-Clause License.
 
 ## Notice
 
-FreeImage for Java uses the FreeImage open source image library. 
+freeimage4java uses the FreeImage open source image library. 
 See http://freeimage.sourceforge.net for details.
 
     FreeImage library is statically linked with JNI code and distributed as single binary

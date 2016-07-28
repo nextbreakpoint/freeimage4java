@@ -13,7 +13,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.junit.Assert.assertThat;
 
-public class TestFreeImage {
+public class TestLib {
     private static final int IMAGE_WIDTH = 100;
     private static final int IMAGE_HEIGHT = 100;
 

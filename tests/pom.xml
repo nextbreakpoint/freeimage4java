@@ -5,8 +5,8 @@
 	<artifactId>com.nextbreakpoint.freeimage4java.tests</artifactId>
 	<version>1.0.0</version>
 	<packaging>jar</packaging>
-	<name>FreeImage for Java - Tests</name>
-	<description>FreeImage for Java provides a JNI wrapper of FreeImage library</description>
+	<name>freeimage4java - Tests</name>
+	<description>freeimage4java provides a JNI wrapper of FreeImage library</description>
 	<url>https://github.com/nextbreakpoint/freeimage4java</url>
 	<licenses>
 		<license>
