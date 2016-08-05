@@ -5,5 +5,5 @@ JAVA_HOME=`/usr/libexec/java_home`
 OUTPUT_DIR=$(BUILD_DIR)/com.nextbreakpoint.freeimage4java/src/main/resources/macos
 
 all:
-	mkdir -p $(OUTPUT_DIR) && g++ --verbose -o $(OUTPUT_DIR)/libfreeimage4java.jnilib -ISource -L. -I$(JAVA_HOME)/include -I$(JAVA_HOME)/include/darwin -shared -fPIC -Wall -m$(LIB_TYPE) -DFREEIMAGE_LIB -lfreeimage -lm $(BUILD_DIR)/freeimage4java_wrap.cxx
+	mkdir -p $(OUTPUT_DIR) && g++ --verbose -o $(OUTPUT_DIR)/libfreeimage4java.jnilib -ISource -L. -I$(JAVA_HOME)/include -I$(JAVA_HOME)/include/darwin -shared -fPIC -Wall -m$(LIB_TYPE) -DFREEIMAGE_LIB $(BUILD_DIR)/freeimage4java_wrap.cxx -lfreeimage -lm 
 	

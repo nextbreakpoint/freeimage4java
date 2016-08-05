@@ -5,4 +5,4 @@ JAVA_HOME=/usr/lib/jvm/java-8-oracle
 OUTPUT_DIR=$(BUILD_DIR)/com.nextbreakpoint.freeimage4java/src/main/resources/linux
 
 all: 	
-	mkdir -p $(OUTPUT_DIR) && g++ --verbose -o $(OUTPUT_DIR)/libfreeimage4java.so -L. -ISource -I$(JAVA_HOME)/include -I$(JAVA_HOME)/include/linux -Wl,-soname,libfreeimage4java.so -shared -fPIC -Wall -m$(LIB_TYPE) -DFREEIMAGE_LIB -lstdc++ -lm -lfreeimage $(BUILD_DIR)/freeimage4java_wrap.cxx 
+	mkdir -p $(OUTPUT_DIR) && g++ --verbose -o $(OUTPUT_DIR)/libfreeimage4java.so -L. -ISource -I$(JAVA_HOME)/include -I$(JAVA_HOME)/include/linux -shared -fPIC -Wall -m$(LIB_TYPE) -Wl,-Bsymbolic -DFREEIMAGE_LIB $(BUILD_DIR)/freeimage4java_wrap.cxx -lm -lfreeimage 
