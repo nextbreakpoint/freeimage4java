@@ -7,6 +7,9 @@ RUN cvs -z3 -d:pserver:anonymous@freeimage.cvs.sourceforge.net:/cvsroot/freeimag
 COPY Makefile.lib.linux FreeImage/Makefile.lib.linux
 COPY Makefile.jni.linux FreeImage/Makefile.jni.linux
 
+COPY Patch.linux FreeImage/Patch.linux
+RUN patch -p0 < FreeImage/Patch.linux
+
 COPY build-linux.sh build-linux.sh
 
 RUN chmod 700 build-linux.sh

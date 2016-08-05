@@ -7,8 +7,8 @@ RUN cvs -z3 -d:pserver:anonymous@freeimage.cvs.sourceforge.net:/cvsroot/freeimag
 COPY Makefile.lib.mingw64 FreeImage/Makefile.lib.mingw64
 COPY Makefile.jni.mingw64 FreeImage/Makefile.jni.mingw64
 
-COPY mingw64.patch FreeImage/mingw64.patch
-RUN patch -p0 < FreeImage/mingw64.patch
+COPY Patch.mingw64 FreeImage/Patch.mingw64
+RUN patch -p0 < FreeImage/Patch.mingw64
 
 COPY build-mingw64.sh build-mingw64.sh
 
