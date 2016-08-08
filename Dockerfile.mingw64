@@ -1,8 +1,8 @@
 FROM freeimage4java:latest
 
-RUN apt-get update && apt-get -y install cvs make mingw-w64
+RUN apt-get update && apt-get -y install make mingw-w64
 
-RUN cvs -z3 -d:pserver:anonymous@freeimage.cvs.sourceforge.net:/cvsroot/freeimage co -P FreeImage
+RUN git clone https://github.com/nextbreakpoint/FreeImage.git FreeImage
 
 COPY Makefile.lib.mingw64 FreeImage/Makefile.lib.mingw64
 COPY Makefile.jni.mingw64 FreeImage/Makefile.jni.mingw64
