@@ -5,8 +5,7 @@ RUN apt-get update && apt-get -y install make gcc g++
 COPY Makefile.lib.linux FreeImage/Makefile.lib.linux
 COPY Makefile.jni.linux FreeImage/Makefile.jni.linux
 
-COPY Patch.linux FreeImage/Patch.linux
-RUN patch -p0 < FreeImage/Patch.linux
+COPY Patch.linux Patch.linux
 
 COPY build-linux.sh build-linux.sh
 

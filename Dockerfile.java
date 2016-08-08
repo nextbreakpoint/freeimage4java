@@ -1,4 +1,4 @@
-FROM freeimage4java:latest
+FROM freeimage4java-base:latest
 
 COPY freeimage4java.i freeimage4java.i 
 

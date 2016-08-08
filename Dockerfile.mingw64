@@ -5,8 +5,7 @@ RUN apt-get update && apt-get -y install make mingw-w64
 COPY Makefile.lib.mingw64 FreeImage/Makefile.lib.mingw64
 COPY Makefile.jni.mingw64 FreeImage/Makefile.jni.mingw64
 
-COPY Patch.mingw64 FreeImage/Patch.mingw64
-RUN patch -p0 < FreeImage/Patch.mingw64
+COPY Patch.mingw64 Patch.mingw64
 
 COPY build-mingw64.sh build-mingw64.sh
 

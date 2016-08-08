@@ -1,3 +1,5 @@
-FROM freeimage4java:latest
+FROM freeimage4java-base:latest
 
-RUN git clone https://github.com/nextbreakpoint/FreeImage.git FreeImage
+COPY checkout.sh checkout.sh
+
+RUN sh checkout.sh
