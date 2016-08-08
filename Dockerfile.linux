@@ -1,8 +1,6 @@
-FROM freeimage4java:latest
+FROM freeimage4java-repo:latest
 
 RUN apt-get update && apt-get -y install make gcc g++
-
-RUN git clone https://github.com/nextbreakpoint/FreeImage.git FreeImage
 
 COPY Makefile.lib.linux FreeImage/Makefile.lib.linux
 COPY Makefile.jni.linux FreeImage/Makefile.jni.linux
