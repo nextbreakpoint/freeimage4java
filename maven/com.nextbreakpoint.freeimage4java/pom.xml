@@ -6,7 +6,7 @@
 	<version>1.0.0</version>
 	<packaging>jar</packaging>
 	<name>freeimage4java</name>
-	<description>freeimage4java provides a JNI wrapper of FreeImage library</description>
+	<description>FreeImage4Java provides a JNI wrapper of FreeImage library</description>
 	<url>https://github.com/nextbreakpoint/freeimage4java</url>
 	<licenses>
 		<license>
