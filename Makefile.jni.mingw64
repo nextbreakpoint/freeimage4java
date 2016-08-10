@@ -5,4 +5,4 @@ JAVA_HOME=/usr/lib/jvm/java-8-oracle
 OUTPUT_DIR=$(BUILD_DIR)/com.nextbreakpoint.freeimage4java/src/main/resources/win32
 
 all: 
-	mkdir -p $(OUTPUT_DIR) && x86_64-w64-mingw32-g++ --verbose -o $(OUTPUT_DIR)/freeimage4java.dll -L. -ISource -I$(JAVA_HOME)/include -I$(JAVA_HOME)/include/linux -shared -fPIC -Wall -m$(LIB_TYPE) -Wl,--out-implib=freeimage4java.dll.a -Wl,-add-stdcall-alias -Wl,-Bsymbolic -DFREEIMAGE_LIB $(BUILD_DIR)/freeimage4java_wrap.cxx -lFreeImage -lm -lws2_32 
+	mkdir -p $(OUTPUT_DIR) && x86_64-w64-mingw32-g++ --verbose -o $(OUTPUT_DIR)/freeimage4java.dll -L. -ISource -I$(JAVA_HOME)/include -I$(JAVA_HOME)/include/linux -shared -fPIC -Wall -m$(LIB_TYPE) -Wl,--out-implib=freeimage4java.dll.a -Wl,-add-stdcall-alias -Wl,-Bsymbolic -static-libstdc++ -static-libgcc -DFREEIMAGE_LIB $(BUILD_DIR)/freeimage4java_wrap.cxx -lFreeImage -lm -lws2_32 
