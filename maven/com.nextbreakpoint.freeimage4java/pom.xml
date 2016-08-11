@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.nextbreakpoint</groupId>
 	<artifactId>com.nextbreakpoint.freeimage4java</artifactId>
-	<version>1.0.0</version>
+	<version>3.18.0-1.0</version>
 	<packaging>jar</packaging>
 	<name>freeimage4java</name>
 	<description>FreeImage4Java provides a JNI wrapper of FreeImage library</description>
