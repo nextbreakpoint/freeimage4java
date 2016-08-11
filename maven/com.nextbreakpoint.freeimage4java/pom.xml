@@ -5,7 +5,7 @@
 	<artifactId>com.nextbreakpoint.freeimage4java</artifactId>
 	<version>3.18.0-1.0</version>
 	<packaging>jar</packaging>
-	<name>freeimage4java</name>
+	<name>FreeImage4Java</name>
 	<description>FreeImage4Java provides a JNI wrapper of FreeImage library</description>
 	<url>https://github.com/nextbreakpoint/freeimage4java</url>
 	<licenses>
