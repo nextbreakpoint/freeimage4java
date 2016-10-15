@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.nextbreakpoint</groupId>
 	<artifactId>com.nextbreakpoint.freeimage4java.tests</artifactId>
-	<version>3.18.0-1.0</version>
+	<version>3.18.0-1.1</version>
 	<packaging>jar</packaging>
 	<name>Tests of FreeImage4Java</name>
 	<description>FreeImage4Java provides a JNI wrapper of FreeImage library</description>
@@ -82,7 +82,7 @@
 		<dependency>
 			<groupId>com.nextbreakpoint</groupId>
 			<artifactId>com.nextbreakpoint.freeimage4java</artifactId>
-			<version>3.18.0-1.0</version>
+			<version>3.18.0-1.1</version>
 		</dependency>
 		<dependency>
 			<groupId>junit</groupId>

@@ -1,4 +1,4 @@
-# FreeImage4Java 3.18.0-1.0
+# FreeImage4Java 3.18.0-1.1
 
 FreeImage4Java provides a JNI wrapper of FreeImage library version 3.18.0.
 

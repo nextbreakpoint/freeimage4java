@@ -25,7 +25,7 @@ SHAREDLIB = lib$(TARGET)-$(VER_MAJOR).$(VER_MINOR).dylib
 LIBNAME = lib$(TARGET).$(VER_MAJOR).dylib
 HEADER = Source/FreeImage.h
 
-MACOS_SDK=/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk/
+MACOS_SDK=/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk/
 
 # Define the copy command.
 CP = cp
