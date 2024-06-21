@@ -1,0 +1,2 @@
+WARNING: Skipping va_list (type <error: struct __va_list_tag> is not supported)
+WARNING: Skipping __gnuc_va_list (type <error: struct __va_list_tag> is not supported)

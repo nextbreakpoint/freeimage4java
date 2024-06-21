@@ -1,0 +1,13 @@
+diff --git a/Makefile.gnu b/Makefile.gnu
+index 92f6358..266a204 100644
+--- a/Makefile.gnu
++++ b/Makefile.gnu
+@@ -23,7 +23,7 @@ CFLAGS += -DNO_LCMS
+ # LibJXR
+ CFLAGS += -DDISABLE_PERF_MEASUREMENT -D__ANSI__
+ CFLAGS += $(INCLUDE)
+-CXXFLAGS ?= -O3 -fPIC -fexceptions -fvisibility=hidden -Wno-ctor-dtor-privacy
++CXXFLAGS ?= -O3 -fPIC -fexceptions -fvisibility=hidden -Wno-ctor-dtor-privacy --std=c++14
+ # LibJXR
+ CXXFLAGS += -D__ANSI__
+ CXXFLAGS += $(INCLUDE)
