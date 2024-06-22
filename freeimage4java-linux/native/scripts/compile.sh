@@ -19,8 +19,10 @@ gcc --verbose \
   -m${LIB_TYPE} \
   -Wall \
   -fpic \
+  -Wl,--no-undefined \
   -Wl,-Bsymbolic \
   -Wl,--whole-archive \
   libfreeimage.a \
   -Wl,--no-whole-archive \
-  -lm
+  -lm \
+  -lstdc++

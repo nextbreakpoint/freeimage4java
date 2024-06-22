@@ -19,6 +19,7 @@ gcc --verbose \
   -m${LIB_TYPE} \
   -Wall \
   -fpic \
+  -Wl,--no-undefined \
   -Wl,-force_load \
   libfreeimage.a \
   -lm \
