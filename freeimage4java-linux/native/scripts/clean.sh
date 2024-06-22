@@ -6,4 +6,4 @@ FREEIMAGE_HOME=$(pwd)/freeimage
 
 cd "$FREEIMAGE_HOME" || exit
 
-make clean
+make -f Makefile.gnu clean

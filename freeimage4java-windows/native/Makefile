@@ -29,4 +29,4 @@ build-image:
 
 .PHONY: build-lib
 build-lib:
-	docker run --rm -i -v $(PWD):/var/native freeimage4java-windows make compile
+	docker run --rm -i -v $(PWD):/var/native freeimage4java-windows make checkout compile

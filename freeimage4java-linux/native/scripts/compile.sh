@@ -11,7 +11,7 @@ cd "$FREEIMAGE_HOME" || exit
 git reset --hard
 patch -p1 -N < ../freeimage.patch
 
-make
+make -f Makefile.gnu
 
 gcc --verbose \
   -o libfreeimage4java.so \
@@ -23,5 +23,4 @@ gcc --verbose \
   -Wl,--whole-archive \
   libfreeimage.a \
   -Wl,--no-whole-archive \
-  -lm \
-  -lstdc++
+  -lm

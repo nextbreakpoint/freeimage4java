@@ -21,7 +21,7 @@ install:
 	./scripts/copy.sh $(INSTALL_PATH)
 
 .PHONY: all
-all: checkout configure compile install
+all: checkout compile install
 
 .PHONY: build-image
 build-image:
@@ -29,4 +29,4 @@ build-image:
 
 .PHONY: build-lib
 build-lib:
-	docker run --rm -i -v $(PWD):/var/native freeimage4java-linux make checkout configure compile
+	docker run --rm -i -v $(PWD):/var/native freeimage4java-linux make checkout compile

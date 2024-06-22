@@ -1,3 +1,52 @@
+diff --git a/Makefile.mingw b/Makefile.mingw
+index d48fd6e..d53e477 100644
+--- a/Makefile.mingw
++++ b/Makefile.mingw
+@@ -15,30 +15,31 @@ RCFILE = FreeImage.rc
+ # also be specified as an environment variable and can hold
+ # any of STATIC and SHARED and must be in uppercase letters.
+ # Default: SHARED
+-#FREEIMAGE_LIBRARY_TYPE = STATIC
++FREEIMAGE_LIBRARY_TYPE = STATIC
+ 
+-# Redefine the compiler (CC defaults to ´cc´ for MinGW's make,
+-# however there's only ´gcc´ available with MinGW).
+-CC = gcc
++# Redefine the compiler (CC defaults to ï¿½ccï¿½ for MinGW's make,
++# however there's only ï¿½gccï¿½ available with MinGW).
++CC = x86_64-w64-mingw32-gcc
++CXX = x86_64-w64-mingw32-g++
+ 
+-# Redefine the linker (we use ´g++´ for linking, since MinGW's
+-# command ´ld´ comes with wrong (Linux) standard library search
++# Redefine the linker (we use ï¿½g++ï¿½ for linking, since MinGW's
++# command ï¿½ldï¿½ comes with wrong (Linux) standard library search
+ # paths).
+-LD = g++
++LD = x86_64-w64-mingw32-g++
+ 
+-#Define the ´dlltool´ command.
+-DLLTOOL = dlltool
++#Define the ï¿½dlltoolï¿½ command.
++DLLTOOL = x86_64-w64-mingw32-dlltool
+ 
+ #Define the resource compiler.
+-RC = windres
++RC = x86_64-w64-mingw32-windres
+ 
+-# Define the ´copy´ command.
++# Define the ï¿½copyï¿½ command.
+ CP = cp
+ 
+-# Define the ´mkdir´ command.
++# Define the ï¿½mkdirï¿½ command.
+ MD = mkdir
+ 
+-# Define the ´remove´ command.
++# Define the ï¿½removeï¿½ command.
+ RM = rm
+ 
+ # Define additional libraries needed.
 diff --git a/Source/LibJXR/common/include/guiddef.h b/Source/LibJXR/common/include/guiddef.h
 deleted file mode 100644
 index 17e0ed3..0000000
