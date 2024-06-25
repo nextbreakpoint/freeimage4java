@@ -38,9 +38,9 @@ FreeImage4Java is distributed under the terms of BSD 3-Clause License.
 
 ## Notice
 
-FreeImage4Java depends on FreeImage library. See http://freeimage.sourceforge.net for details.
-
-FreeImage library is statically linked with FreeImage4Java library under the terms of FreeImage Public License, version 1.0.
+FreeImage4Java is distributed as JAR file which contains Java classes and a native library. The native library must be installed in the library path of the Java runtime.   
+Please note that the native library is statically liked with FreeImage library under the terms of FreeImage Public License, version 1.0.
+You should have received a copy of the FPL v1.0 license with FFmpeg4Java. See http://freeimage.sourceforge.net for more information about FreeImage.
 
 
 ## Reference
