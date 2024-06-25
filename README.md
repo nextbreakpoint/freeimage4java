@@ -40,10 +40,23 @@ FreeImage4Java is distributed under the terms of BSD 3-Clause License.
 
 FreeImage4Java is distributed as JAR file which contains Java classes and a native library. The native library must be installed in the library path of the Java runtime.   
 Please note that the native library is statically liked with FreeImage library under the terms of FreeImage Public License, version 1.0.
-You should have received a copy of the FPL v1.0 license with FFmpeg4Java. See http://freeimage.sourceforge.net for more information about FreeImage.
+You should have received a copy of the FIPL v1.0 license with FFmpeg4Java. See http://freeimage.sourceforge.net for more information about FreeImage.
 
 
 ## Reference
 
-https://www.ultraengine.com/community/topic/59665-freeimage-build-errors/
-https://sourceforge.net/p/mingw-w64/mailman/mingw-w64-public/thread/CAKk_kQPHeSj=08mLwX+zeC6Hgc6HofuUoFt1Zv=ZU2YgTd02KA@mail.gmail.com/
+Java Foreign Function and Memory API:
+https://openjdk.org/jeps/454
+
+jextract download:
+https://jdk.java.net/jextract/
+
+jextract guide:
+https://github.com/openjdk/jextract/blob/master/doc/GUIDE.md
+
+FreeImage documentation:
+https://freeimage.sourceforge.io/documentation.html
+
+FreeImage source code:
+https://sourceforge.net/p/freeimage/code/
+
