@@ -20,4 +20,4 @@ install:
 all: build-lib install
 
 .PHONY: build-lib
-build-lib: checkout configure compile
+build-lib: checkout compile

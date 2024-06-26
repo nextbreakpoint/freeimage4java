@@ -28,5 +28,5 @@ build-image:
 	docker build -t freeimage4java-windows .
 
 .PHONY: build-lib
-build-lib:
+build-lib: build-image
 	docker run --rm -i -v $(CURDIR):/var/native freeimage4java-windows make checkout compile
