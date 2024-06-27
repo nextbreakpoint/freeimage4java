@@ -38,12 +38,14 @@ FreeImage4Java is distributed under the terms of BSD 3-Clause License.
 
 ## Notice
 
-FreeImage4Java is distributed as JAR file which contains Java classes and a native library. The native library must be installed in the library path of the Java runtime.   
+FreeImage4Java is distributed as independent JAR files, one for each supported operating system. 
+Each JAR file contains a native library which must be installed in the library path of the Java runtime.
+
 Please note that the native library is statically liked with FreeImage library under the terms of FreeImage Public License, version 1.0.
 You should have received a copy of the FIPL v1.0 license with FreeImage4Java. See http://freeimage.sourceforge.net for more information about FreeImage.
 
 
-## Binary distribution
+## Get binaries
 
 FreeImage4Java is available in Maven Central Repository and [GitHub](https://github.com/nextbreakpoint/freeimage4Java).
 
@@ -67,17 +69,102 @@ If you are using Maven, add one of the following dependencies in your POM:
         <version>3.18.0-2.0</version>
     </dependency>
 
+Also, add one of the following to download the native library:
 
-## Build
+    <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <executions>
+            <execution>
+                <id>copy-lib</id>
+                <phase>package</phase>
+                <goals>
+                    <goal>unpack</goal>
+                </goals>
+                <configuration>
+                    <artifactItems>
+                        <artifactItem>
+                            <groupId>com.nextbreakpoint</groupId>
+                            <artifactId>com.nextbreakpoint.freeimage4java.macos</artifactId>
+                            <classifier>x86_64</classifier>
+                            <type>jar</type>
+                            <overWrite>true</overWrite>
+                            <outputDirectory>${project.build.directory}/lib</outputDirectory>
+                        </artifactItem>
+                    </artifactItems>
+                    <includes>**/*.dylib</includes>
+                </configuration>
+            </execution>
+        </executions>
+    </plugin>
 
-We recommend to use a Mac to build FreeImage4Java because you can compile the library for all systems in one place, but that is not required.
-A Linux system con be used to compile the library for Linux and Windows (via cross compilation). You will need a Mac only to compile the library for MacOS.
+    <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <executions>
+            <execution>
+                <id>copy-lib</id>
+                <phase>package</phase>
+                <goals>
+                    <goal>unpack</goal>
+                </goals>
+                <configuration>
+                    <artifactItems>
+                        <artifactItem>
+                            <groupId>com.nextbreakpoint</groupId>
+                            <artifactId>com.nextbreakpoint.freeimage4java.linux</artifactId>
+                            <classifier>x86_64</classifier>
+                            <type>jar</type>
+                            <overWrite>true</overWrite>
+                            <outputDirectory>${project.build.directory}/lib</outputDirectory>
+                        </artifactItem>
+                    </artifactItems>
+                    <includes>**/*.so</includes>
+                </configuration>
+            </execution>
+        </executions>
+    </plugin>
 
-We assume you have a Mac, however the same instructions work for Linux.
-Make sue you have installed Xcode command line tools and Docker (or just Docker if you are on Linux).
-We use Docker to simplify the toolchain configuration and ensure to have a consistent environment.
+    <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <executions>
+            <execution>
+                <id>copy-lib</id>
+                <phase>package</phase>
+                <goals>
+                    <goal>unpack</goal>
+                </goals>
+                <configuration>
+                    <artifactItems>
+                        <artifactItem>
+                            <groupId>com.nextbreakpoint</groupId>
+                            <artifactId>com.nextbreakpoint.freeimage4java.windows</artifactId>
+                            <classifier>x86_64</classifier>
+                            <type>jar</type>
+                            <overWrite>true</overWrite>
+                            <outputDirectory>${project.build.directory}/lib</outputDirectory>
+                        </artifactItem>
+                    </artifactItems>
+                    <includes>**/*.dll</includes>
+                </configuration>
+            </execution>
+        </executions>
+    </plugin>
 
-## Build the library for MacOS
+
+## Build libraries
+
+We recommend to use a Mac to build FreeImage4Java because you can compile the library for all systems in one place, but that is not strictly required.
+A Linux system can be used to compile the library for Linux and Windows (via cross compilation), and use a Mac system only to compile the library for MacOS.
+
+We assume you have a Mac, however the same build instructions work for Linux (but only for compiling the library for Linux and Windows).
+
+Make sue you have installed Xcode command line tools (only for MacOS), Docker, git, make, maven, and Java 22.
+
+    We use Docker to simplify the toolchain configuration and ensure to have a consistent environment
+
+### Build library for MacOS
 
 Compile and install the library:
 
@@ -95,7 +182,7 @@ Inspect the libraries linked with the library:
 
     otool -L freeimage4Java-macos/src/main/resources/libfreeimage4Java.dylib
 
-## Build the library for Linux
+### Build library for Linux
 
 Compile and install the library:
 
@@ -113,7 +200,7 @@ Inspect the libraries linked with the library:
 
     objdump -p freeimage4Java-linux/src/main/resources/libfreeimage4Java.so | grep .so
 
-## Build the library for Windows
+### Build library for Windows
 
 Compile and install the library:
 
@@ -131,7 +218,7 @@ Inspect the libraries linked with the library:
 
     objdump -p freeimage4Java-windows/src/main/resources/freeimage4Java.dll | grep .dll
 
-## Build the Java code
+## Build Java code
 
 Compile and package the JARs:
 
@@ -147,7 +234,7 @@ Install the artifacts in your local Maven repository:
 
     make install
 
-## Test the Java code
+## Test Java code
 
 Test the MacOS module (must be executed on MacOS):
 
@@ -167,7 +254,7 @@ The Java code of all modules is generated from the FreeImage header files by jex
 
 Download and install jextract for Java 22 for all target systems (see links below).
 
-Edit the source file in the target module with the correct path of jextract and java.
+Edit the source file in the target module updating the path of jextract and java.
 
 Generate the code for MacOS (must be executed on MacOS):
 
@@ -182,12 +269,13 @@ Generate the code for Windows (must be executed on Windows):
     eval $(cat freeimage4Java-windows/source) && make extract system=windows
 
 
-## Examples
+## Code examples
 
-See the code of the tests for an example of how to use the wrapper.
+A simple example is provided for each supported system.
+Look at the POM files for details about how to download the native library and execute the code.
 
 
-## Reference
+## References
 
 Java Foreign Function and Memory API:
 https://openjdk.org/jeps/454
