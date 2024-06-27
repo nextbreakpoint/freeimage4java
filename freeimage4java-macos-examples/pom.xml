@@ -6,7 +6,7 @@
         <artifactId>com.nextbreakpoint.freeimage4java</artifactId>
         <version>3.18.0-2.0</version>
     </parent>
-    <artifactId>examples</artifactId>
+    <artifactId>com.nextbreakpoint.freeimage4java.macos.examples</artifactId>
     <packaging>jar</packaging>
     <name>FreeImage4Java MacOS Examples</name>
     <description>FreeImage4Java provides a Java wrapper of FreeImage library</description>
