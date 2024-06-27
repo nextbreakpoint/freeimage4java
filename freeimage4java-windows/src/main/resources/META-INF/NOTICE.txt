@@ -1,0 +1,5 @@
+FreeImage4Java is distributed as independent JAR files, one for each supported operating system.
+Each JAR file contains a native library which must be installed in the library path of the Java runtime.
+
+Please note that the native library is statically liked with FreeImage library under the terms of FreeImage Public License, version 1.0.
+You should have received a copy of the FIPL v1.0 license with FreeImage4Java. See http://freeimage.sourceforge.net for more information about FreeImage.
