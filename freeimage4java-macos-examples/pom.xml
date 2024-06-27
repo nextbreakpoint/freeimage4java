@@ -63,7 +63,7 @@
                                 <argument>-classpath</argument>
                                 <classpath/>
                                 <argument>-Djava.library.path=${project.build.directory}/lib</argument>
-                                <argument>com.nextbreakpoint.freeimage4java.macos.ConvertToGreyscaleMain</argument>
+                                <argument>com.nextbreakpoint.freeimage4java.macos.ConvertImageMain</argument>
                                 <argument>sample.png</argument>
                                 <argument>output.png</argument>
                             </arguments>

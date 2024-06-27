@@ -12,7 +12,7 @@ import static com.nextbreakpoint.freeimage4java.windows.Libfreeimage.PNG_DEFAULT
 import static com.nextbreakpoint.freeimage4java.windows.Libfreeimage.TRUE;
 import static java.lang.foreign.MemorySegment.NULL;
 
-class ConvertToGreyscaleMain {
+class ConvertImageMain {
     public static void main(String[] args) {
         if (args.length < 2) {
             throw new IllegalArgumentException("Invalid arguments");
