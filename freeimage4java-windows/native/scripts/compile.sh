@@ -19,6 +19,8 @@ x86_64-w64-mingw32-gcc --verbose \
   -m${LIB_TYPE} \
   -Wall \
   -fpic \
+  -static-libgcc \
+  -static-libstdc++ \
   -Wl,--out-implib=freeimage4java.dll.a \
   -Wl,-add-stdcall-alias \
   -Wl,--no-undefined \
@@ -28,6 +30,5 @@ x86_64-w64-mingw32-gcc --verbose \
   -Wl,--no-whole-archive \
   -Wl,-Bstatic \
   -lm \
-  -Wl,-Bstatic \
   -lstdc++ \
   -lws2_32
