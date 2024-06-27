@@ -4,6 +4,6 @@ set -e
 
 FREEIMAGE_HOME=$(pwd)/freeimage
 
-cd "$FREEIMAGE_HOME" || exit
-
-make clean
+if [ -d "$FREEIMAGE_HOME" ]; then
+  make -C "$FREEIMAGE_HOME" clean
+fi

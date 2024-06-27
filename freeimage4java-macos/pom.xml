@@ -9,7 +9,7 @@
     <artifactId>com.nextbreakpoint.freeimage4java.macos</artifactId>
     <packaging>jar</packaging>
     <name>FreeImage4Java MacOS</name>
-    <description>FreeImage4Java provides a Java wrapper of freeimage library</description>
+    <description>FreeImage4Java provides a Java wrapper of FreeImage library</description>
     <build>
         <plugins>
             <plugin>
@@ -41,22 +41,20 @@
                 <artifactId>maven-jar-plugin</artifactId>
                 <executions>
                     <execution>
-                        <id>macos</id>
+                        <id>native</id>
                         <phase>package</phase>
                         <goals>
                             <goal>jar</goal>
                         </goals>
                         <configuration>
-                            <archive>
-                                <manifestEntries>
-                                    <Automatic-Module-Name>com.nextbreakpoint.freeimage4java.macos</Automatic-Module-Name>
-                                </manifestEntries>
-                            </archive>
                             <classifier>x86_64</classifier>
                             <includes>
-                                <include>**/*.class</include>
                                 <include>**/*.dylib</include>
+                                <include>**/*.txt</include>
                             </includes>
+                            <excludes>
+                                <exclude>**/*.class</exclude>
+                            </excludes>
                         </configuration>
                     </execution>
                 </executions>
