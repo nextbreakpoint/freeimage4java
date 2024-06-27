@@ -45,6 +45,7 @@
         <maven-enforcer-plugin.version>3.5.0</maven-enforcer-plugin.version>
         <maven-jar-plugin.version>3.4.1</maven-jar-plugin.version>
         <maven-gpg-plugin.version>1.5</maven-gpg-plugin.version>
+        <exec-maven-plugin.version>3.3.0</exec-maven-plugin.version>
         <versions-maven-plugin.version>2.16.2</versions-maven-plugin.version>
         <nexus-staging-maven-plugin.version>1.7.0</nexus-staging-maven-plugin.version>
         <github-release-plugin.version>1.6.0</github-release-plugin.version>
@@ -102,6 +103,11 @@
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-surefire-plugin</artifactId>
                     <version>${maven-surefire-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>exec-maven-plugin</artifactId>
+                    <version>${exec-maven-plugin.version}</version>
                 </plugin>
                 <plugin>
                     <groupId>org.sonatype.plugins</groupId>
@@ -333,6 +339,7 @@
             </properties>
             <modules>
                 <module>freeimage4java-windows-test</module>
+                <module>freeimage4java-windows-examples</module>
             </modules>
         </profile>
         <profile>
@@ -343,6 +350,7 @@
             </properties>
             <modules>
                 <module>freeimage4java-linux-test</module>
+                <module>freeimage4java-linux-examples</module>
             </modules>
         </profile>
         <profile>
@@ -353,6 +361,7 @@
             </properties>
             <modules>
                 <module>freeimage4java-macos-test</module>
+                <module>freeimage4java-macos-examples</module>
             </modules>
         </profile>
     </profiles>
