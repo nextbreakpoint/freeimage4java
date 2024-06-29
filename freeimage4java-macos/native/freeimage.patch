@@ -1,0 +1,132 @@
+diff --git a/Makefile.osx b/Makefile.osx
+index c39121d..4fce37d 100644
+--- a/Makefile.osx
++++ b/Makefile.osx
+@@ -15,7 +15,7 @@ CC_X86_64 = $(shell xcrun -find clang)
+ CPP_I386 = $(shell xcrun -find clang++)
+ CPP_X86_64 = $(shell xcrun -find clang++)
+ MACOSX_DEPLOY = -mmacosx-version-min=$(MACOSX_DEPLOYMENT_TARGET)
+-COMPILERFLAGS = -Os -fexceptions -fvisibility=hidden -DNO_LCMS -D__ANSI__
++COMPILERFLAGS = -Os -fexceptions -fvisibility=hidden -DNO_LCMS -D__ANSI__ -DDISABLE_PERF_MEASUREMENT -DPNG_ARM_NEON_OPT=0
+ COMPILERFLAGS_I386 = -arch i386
+ COMPILERFLAGS_X86_64 = -arch x86_64
+ COMPILERPPFLAGS = -Wno-ctor-dtor-privacy -D__ANSI__ -std=c++11 -stdlib=libc++ -Wc++11-narrowing
+@@ -54,6 +54,7 @@ all: dist
+ # ONLY STATIC AND 64 BIT // START ---
+ 
+ dist: FreeImage
++	mkdir -p Dist
+ 	cp *.a Dist
+ 	cp Source/FreeImage.h Dist
+ 
+diff --git a/Source/LibJXR/image/decode/segdec.c b/Source/LibJXR/image/decode/segdec.c
+index fb83f2b..a55026a 100644
+--- a/Source/LibJXR/image/decode/segdec.c
++++ b/Source/LibJXR/image/decode/segdec.c
+@@ -1,14 +1,14 @@
+ //*@@@+++@@@@******************************************************************
+ //
+-// Copyright © Microsoft Corp.
++// Copyright ï¿½ Microsoft Corp.
+ // All rights reserved.
+ // 
+ // Redistribution and use in source and binary forms, with or without
+ // modification, are permitted provided that the following conditions are met:
+ // 
+-// • Redistributions of source code must retain the above copyright notice,
++// ï¿½ Redistributions of source code must retain the above copyright notice,
+ //   this list of conditions and the following disclaimer.
+-// • Redistributions in binary form must reproduce the above copyright notice,
++// ï¿½ Redistributions in binary form must reproduce the above copyright notice,
+ //   this list of conditions and the following disclaimer in the documentation
+ //   and/or other materials provided with the distribution.
+ // 
+@@ -29,6 +29,11 @@
+ #include "strcodec.h"
+ #include "decode.h"
+ 
++#ifdef __APPLE__
++    #include <libkern/OSByteOrder.h>
++    #define _byteswap_ulong(x) (__uint32_t) _OSSwapInt32
++#endif
++
+ #ifdef MEM_TRACE
+ #define TRACE_MALLOC    1
+ #define TRACE_NEW       0
+diff --git a/Source/LibJXR/jxrgluelib/JXRGlueJxr.c b/Source/LibJXR/jxrgluelib/JXRGlueJxr.c
+index 6e96a19..a28f653 100644
+--- a/Source/LibJXR/jxrgluelib/JXRGlueJxr.c
++++ b/Source/LibJXR/jxrgluelib/JXRGlueJxr.c
+@@ -1,15 +1,15 @@
+ 
+ //*@@@+++@@@@******************************************************************
+ //
+-// Copyright © Microsoft Corp.
++// Copyright ï¿½ Microsoft Corp.
+ // All rights reserved.
+ // 
+ // Redistribution and use in source and binary forms, with or without
+ // modification, are permitted provided that the following conditions are met:
+ // 
+-// • Redistributions of source code must retain the above copyright notice,
++// ï¿½ Redistributions of source code must retain the above copyright notice,
+ //   this list of conditions and the following disclaimer.
+-// • Redistributions in binary form must reproduce the above copyright notice,
++// ï¿½ Redistributions in binary form must reproduce the above copyright notice,
+ //   this list of conditions and the following disclaimer in the documentation
+ //   and/or other materials provided with the distribution.
+ // 
+@@ -29,6 +29,9 @@
+ #include <limits.h>
+ #include <JXRGlue.h>
+ 
++#ifdef __APPLE__
++    #include <wchar.h>
++#endif
+ 
+ static const char szHDPhotoFormat[] = "<dc:format>image/vnd.ms-photo</dc:format>";
+ const U32 IFDEntryTypeSizes[] = { 0, 1, 1, 2, 4, 8, 1, 1, 2, 4, 8, 4, 8 };
+diff --git a/Source/ZLib/Makefile.in b/Source/ZLib/Makefile.in
+index 5a77949..ec28b37 100644
+--- a/Source/ZLib/Makefile.in
++++ b/Source/ZLib/Makefile.in
+@@ -18,7 +18,7 @@
+ 
+ CC=cc
+ 
+-CFLAGS=-O
++CFLAGS=-O -std=c90
+ #CFLAGS=-O -DMAX_WBITS=14 -DMAX_MEM_LEVEL=7
+ #CFLAGS=-g -DZLIB_DEBUG
+ #CFLAGS=-O3 -Wall -Wwrite-strings -Wpointer-arith -Wconversion \
+diff --git a/Source/ZLib/gzguts.h b/Source/ZLib/gzguts.h
+index 990a4d2..ed914c0 100644
+--- a/Source/ZLib/gzguts.h
++++ b/Source/ZLib/gzguts.h
+@@ -18,6 +18,10 @@
+ #  define ZLIB_INTERNAL
+ #endif
+ 
++#ifdef __APPLE__
++    #include <unistd.h>
++#endif
++
+ #include <stdio.h>
+ #include "zlib.h"
+ #ifdef STDC
+diff --git a/Source/ZLib/gzlib.c b/Source/ZLib/gzlib.c
+index 4105e6a..e4cff77 100644
+--- a/Source/ZLib/gzlib.c
++++ b/Source/ZLib/gzlib.c
+@@ -5,6 +5,11 @@
+ 
+ #include "gzguts.h"
+ 
++#ifdef __APPLE__
++    #define _LARGEFILE64_SOURCE     /* See feature_test_macros(7) */
++    #include <sys/types.h>
++#endif
++
+ #if defined(_WIN32) && !defined(__BORLANDC__) && !defined(__MINGW32__)
+ #  define LSEEK _lseeki64
+ #else

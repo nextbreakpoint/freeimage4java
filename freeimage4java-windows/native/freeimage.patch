@@ -1,0 +1,398 @@
+diff --git a/Makefile.mingw b/Makefile.mingw
+index d48fd6e..d53e477 100644
+--- a/Makefile.mingw
++++ b/Makefile.mingw
+@@ -15,30 +15,31 @@ RCFILE = FreeImage.rc
+ # also be specified as an environment variable and can hold
+ # any of STATIC and SHARED and must be in uppercase letters.
+ # Default: SHARED
+-#FREEIMAGE_LIBRARY_TYPE = STATIC
++FREEIMAGE_LIBRARY_TYPE = STATIC
+ 
+-# Redefine the compiler (CC defaults to ´cc´ for MinGW's make,
+-# however there's only ´gcc´ available with MinGW).
+-CC = gcc
++# Redefine the compiler (CC defaults to ï¿½ccï¿½ for MinGW's make,
++# however there's only ï¿½gccï¿½ available with MinGW).
++CC = x86_64-w64-mingw32-gcc
++CXX = x86_64-w64-mingw32-g++
+ 
+-# Redefine the linker (we use ´g++´ for linking, since MinGW's
+-# command ´ld´ comes with wrong (Linux) standard library search
++# Redefine the linker (we use ï¿½g++ï¿½ for linking, since MinGW's
++# command ï¿½ldï¿½ comes with wrong (Linux) standard library search
+ # paths).
+-LD = g++
++LD = x86_64-w64-mingw32-g++
+ 
+-#Define the ´dlltool´ command.
+-DLLTOOL = dlltool
++#Define the ï¿½dlltoolï¿½ command.
++DLLTOOL = x86_64-w64-mingw32-dlltool
+ 
+ #Define the resource compiler.
+-RC = windres
++RC = x86_64-w64-mingw32-windres
+ 
+-# Define the ´copy´ command.
++# Define the ï¿½copyï¿½ command.
+ CP = cp
+ 
+-# Define the ´mkdir´ command.
++# Define the ï¿½mkdirï¿½ command.
+ MD = mkdir
+ 
+-# Define the ´remove´ command.
++# Define the ï¿½removeï¿½ command.
+ RM = rm
+ 
+ # Define additional libraries needed.
+diff --git a/Source/LibJXR/common/include/guiddef.h b/Source/LibJXR/common/include/guiddef.h
+deleted file mode 100644
+index 17e0ed3..0000000
+--- a/Source/LibJXR/common/include/guiddef.h
++++ /dev/null
+@@ -1,230 +0,0 @@
+-//+---------------------------------------------------------------------------
+-//
+-// Copyright © Microsoft Corp.
+-// All rights reserved.
+-// 
+-// Redistribution and use in source and binary forms, with or without
+-// modification, are permitted provided that the following conditions are met:
+-// 
+-// • Redistributions of source code must retain the above copyright notice,
+-//   this list of conditions and the following disclaimer.
+-// • Redistributions in binary form must reproduce the above copyright notice,
+-//   this list of conditions and the following disclaimer in the documentation
+-//   and/or other materials provided with the distribution.
+-// 
+-// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+-// AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+-// IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+-// ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+-// LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+-// CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+-// SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+-// INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+-// CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+-// ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+-// POSSIBILITY OF SUCH DAMAGE.
+-//
+-//  File:       guiddef.h
+-//
+-//  Contents:   GUID definition
+-//
+-//----------------------------------------------------------------------------
+-
+-#ifndef GUID_DEFINED
+-#define GUID_DEFINED
+-#if defined(__midl)
+-typedef struct {
+-    unsigned long  Data1;
+-    unsigned short Data2;
+-    unsigned short Data3;
+-    byte           Data4[ 8 ];
+-} GUID;
+-#else
+-typedef struct _GUID {
+-#if defined(_WINDOWS_) || !__LP64__
+-    unsigned long  Data1;
+-#else
+-    unsigned int   Data1;
+-#endif
+-    unsigned short Data2;
+-    unsigned short Data3;
+-    unsigned char  Data4[ 8 ];
+-} GUID;
+-#endif
+-#endif
+-
+-#ifndef FAR
+-#if defined(_WIN32) || defined(__ANSI__)
+-#define FAR
+-#else
+-#define FAR _far
+-#endif
+-#endif
+-
+-#ifndef DECLSPEC_SELECTANY
+-#if (_MSC_VER >= 1100)
+-#define DECLSPEC_SELECTANY  __declspec(selectany)
+-#else
+-#define DECLSPEC_SELECTANY
+-#endif
+-#endif
+-
+-#ifndef EXTERN_C
+-#ifdef __cplusplus
+-#define EXTERN_C    extern "C"
+-#else
+-#define EXTERN_C    extern
+-#endif
+-#endif
+-
+-#ifdef DEFINE_GUID
+-#undef DEFINE_GUID
+-#endif
+-
+-#ifdef INITGUID
+-#define DEFINE_GUID(name, l, w1, w2, b1, b2, b3, b4, b5, b6, b7, b8) \
+-        const GUID DECLSPEC_SELECTANY name \
+-                = { l, w1, w2, { b1, b2,  b3,  b4,  b5,  b6,  b7,  b8 } }
+-#else
+-#define DEFINE_GUID(name, l, w1, w2, b1, b2, b3, b4, b5, b6, b7, b8) \
+-    EXTERN_C const GUID FAR name
+-#endif // INITGUID
+-
+-#define DEFINE_OLEGUID(name, l, w1, w2) DEFINE_GUID(name, l, w1, w2, 0xC0,0,0,0,0,0,0,0x46)
+-
+-#ifndef _GUIDDEF_H_
+-#define _GUIDDEF_H_
+-
+-#ifndef __LPGUID_DEFINED__
+-#define __LPGUID_DEFINED__
+-typedef GUID *LPGUID;
+-#endif
+-
+-#ifndef __LPCGUID_DEFINED__
+-#define __LPCGUID_DEFINED__
+-typedef const GUID *LPCGUID;
+-#endif
+-
+-#ifndef __IID_DEFINED__
+-#define __IID_DEFINED__
+-
+-typedef GUID IID;
+-typedef IID *LPIID;
+-#define IID_NULL            GUID_NULL
+-#define IsEqualIID(riid1, riid2) IsEqualGUID(riid1, riid2)
+-typedef GUID CLSID;
+-typedef CLSID *LPCLSID;
+-#define CLSID_NULL          GUID_NULL
+-#define IsEqualCLSID(rclsid1, rclsid2) IsEqualGUID(rclsid1, rclsid2)
+-typedef GUID FMTID;
+-typedef FMTID *LPFMTID;
+-#define FMTID_NULL          GUID_NULL
+-#define IsEqualFMTID(rfmtid1, rfmtid2) IsEqualGUID(rfmtid1, rfmtid2)
+-
+-#ifdef __midl_proxy
+-#define __MIDL_CONST
+-#else
+-#define __MIDL_CONST const
+-#endif
+-
+-#ifndef _REFGUID_DEFINED
+-#define _REFGUID_DEFINED
+-#ifdef __cplusplus
+-#define REFGUID const GUID &
+-#else
+-#define REFGUID const GUID * __MIDL_CONST
+-#endif
+-#endif
+-
+-#ifndef _REFIID_DEFINED
+-#define _REFIID_DEFINED
+-#ifdef __cplusplus
+-#define REFIID const IID &
+-#else
+-#define REFIID const IID * __MIDL_CONST
+-#endif
+-#endif
+-
+-#ifndef _REFCLSID_DEFINED
+-#define _REFCLSID_DEFINED
+-#ifdef __cplusplus
+-#define REFCLSID const IID &
+-#else
+-#define REFCLSID const IID * __MIDL_CONST
+-#endif
+-#endif
+-
+-#ifndef _REFFMTID_DEFINED
+-#define _REFFMTID_DEFINED
+-#ifdef __cplusplus
+-#define REFFMTID const IID &
+-#else
+-#define REFFMTID const IID * __MIDL_CONST
+-#endif
+-#endif
+-
+-#endif // !__IID_DEFINED__
+-
+-#if !defined (__midl)
+-#if !defined (_SYS_GUID_OPERATORS_)
+-#define _SYS_GUID_OPERATORS_
+-#include <string.h>
+-
+-// Faster (but makes code fatter) inline version...use sparingly
+-#ifdef __cplusplus
+-__inline int InlineIsEqualGUID(REFGUID rguid1, REFGUID rguid2)
+-{
+-   return (
+-      ((unsigned long *) &rguid1)[0] == ((unsigned long *) &rguid2)[0] &&
+-      ((unsigned long *) &rguid1)[1] == ((unsigned long *) &rguid2)[1] &&
+-      ((unsigned long *) &rguid1)[2] == ((unsigned long *) &rguid2)[2] &&
+-      ((unsigned long *) &rguid1)[3] == ((unsigned long *) &rguid2)[3]);
+-}
+-
+-__inline int IsEqualGUID(REFGUID rguid1, REFGUID rguid2)
+-{
+-    return !memcmp(&rguid1, &rguid2, sizeof(GUID));
+-}
+-
+-#else   // ! __cplusplus
+-
+-#define InlineIsEqualGUID(rguid1, rguid2)  \
+-        (((unsigned long *) rguid1)[0] == ((unsigned long *) rguid2)[0] &&   \
+-        ((unsigned long *) rguid1)[1] == ((unsigned long *) rguid2)[1] &&    \
+-        ((unsigned long *) rguid1)[2] == ((unsigned long *) rguid2)[2] &&    \
+-        ((unsigned long *) rguid1)[3] == ((unsigned long *) rguid2)[3])
+-
+-#define IsEqualGUID(rguid1, rguid2) (!memcmp(rguid1, rguid2, sizeof(GUID)))
+-
+-#endif  // __cplusplus
+-
+-#ifdef __INLINE_ISEQUAL_GUID
+-#undef IsEqualGUID
+-#define IsEqualGUID(rguid1, rguid2) InlineIsEqualGUID(rguid1, rguid2)
+-#endif
+-
+-// Same type, different name
+-
+-#define IsEqualIID(riid1, riid2) IsEqualGUID(riid1, riid2)
+-#define IsEqualCLSID(rclsid1, rclsid2) IsEqualGUID(rclsid1, rclsid2)
+-
+-
+-#if !defined _SYS_GUID_OPERATOR_EQ_ && !defined _NO_SYS_GUID_OPERATOR_EQ_
+-#define _SYS_GUID_OPERATOR_EQ_
+-// A couple of C++ helpers
+-
+-#ifdef __cplusplus
+-__inline int operator==(REFGUID guidOne, REFGUID guidOther)
+-{
+-    return IsEqualGUID(guidOne,guidOther);
+-}
+-
+-__inline int operator!=(REFGUID guidOne, REFGUID guidOther)
+-{
+-    return !(guidOne == guidOther);
+-}
+-#endif
+-#endif  // _SYS_GUID_OPERATOR_EQ_
+-#endif  // _SYS_GUID_OPERATORS_
+-#endif  // __midl
+-#endif  // _GUIDDEF_H_
+diff --git a/Source/LibJXR/image/sys/strcodec.c b/Source/LibJXR/image/sys/strcodec.c
+index 2312aac..c3a125c 100644
+--- a/Source/LibJXR/image/sys/strcodec.c
++++ b/Source/LibJXR/image/sys/strcodec.c
+@@ -1,14 +1,14 @@
+ //*@@@+++@@@@******************************************************************
+ //
+-// Copyright © Microsoft Corp.
++// Copyright ï¿½ Microsoft Corp.
+ // All rights reserved.
+ // 
+ // Redistribution and use in source and binary forms, with or without
+ // modification, are permitted provided that the following conditions are met:
+ // 
+-// • Redistributions of source code must retain the above copyright notice,
++// ï¿½ Redistributions of source code must retain the above copyright notice,
+ //   this list of conditions and the following disclaimer.
+-// • Redistributions in binary form must reproduce the above copyright notice,
++// ï¿½ Redistributions in binary form must reproduce the above copyright notice,
+ //   this list of conditions and the following disclaimer in the documentation
+ //   and/or other materials provided with the distribution.
+ // 
+@@ -669,9 +669,9 @@ ERR detach_SB(SimpleBitIO* pSB)
+ #else
+ // other platform
+ #ifdef _BIG__ENDIAN_
+-#define _byteswap_ulong(x)  (x)
++#define __byteswap_ulong(x)  (x)
+ #else // _BIG__ENDIAN_
+-U32 _byteswap_ulong(U32 bits)
++U32 __byteswap_ulong(U32 bits)
+ {
+     U32 r = (bits & 0xffu) << 24;
+     r |= (bits << 8) & 0xff0000u;
+@@ -692,9 +692,9 @@ U32 load4BE(void* pv)
+     U32  v;
+     v = ((U16 *) pv)[0];
+     v |= ((U32)((U16 *) pv)[1]) << 16;
+-    return _byteswap_ulong(v);
++    return __byteswap_ulong(v);
+ #else // _M_IA64
+-    return _byteswap_ulong(*(U32*)pv);
++    return __byteswap_ulong(*(U32*)pv);
+ #endif // _M_IA64
+ #endif // _BIG__ENDIAN_
+ }
+@@ -704,7 +704,7 @@ U32 load4BE(void* pv)
+ #ifdef _BIG__ENDIAN_
+ #define WRITESWAP_ENDIAN(a) ((a)>>16)
+ #else // _BIG__ENDIAN_
+-#define WRITESWAP_ENDIAN(a)	_byteswap_ulong(a)
++#define WRITESWAP_ENDIAN(a)	__byteswap_ulong(a)
+ #endif // _BIG__ENDIAN_
+ 
+ //================================================================
+diff --git a/Source/OpenEXR/IlmImf/ImfOptimizedPixelReading.h b/Source/OpenEXR/IlmImf/ImfOptimizedPixelReading.h
+index 1c83497..104d54b 100644
+--- a/Source/OpenEXR/IlmImf/ImfOptimizedPixelReading.h
++++ b/Source/OpenEXR/IlmImf/ImfOptimizedPixelReading.h
+@@ -59,7 +59,6 @@ public:
+     
+ };
+ 
+-
+ #if IMF_HAVE_SSE2
+ 
+ 
+diff --git a/Source/OpenEXR/IlmImf/ImfSimd.h b/Source/OpenEXR/IlmImf/ImfSimd.h
+index 09b1042..b680a62 100644
+--- a/Source/OpenEXR/IlmImf/ImfSimd.h
++++ b/Source/OpenEXR/IlmImf/ImfSimd.h
+@@ -44,8 +44,11 @@
+ 
+ 
+ // GCC and Visual Studio SSE2 compiler flags
+-#if defined __SSE2__ || (_MSC_VER >= 1300 && !_M_CEE_PURE)
+-    #define IMF_HAVE_SSE2 1
++
++#ifndef __MINGW64__
++ 	#if defined __SSE2__ || (_MSC_VER >= 1300 && !_M_CEE_PURE)
++ 		#define IMF_HAVE_SSE2 1
++ 	#endif
+ #endif
+ 
+ extern "C"
+diff --git a/Source/OpenEXR/IlmImf/ImfSystemSpecific.h b/Source/OpenEXR/IlmImf/ImfSystemSpecific.h
+index c0261a7..5d5a9f1 100644
+--- a/Source/OpenEXR/IlmImf/ImfSystemSpecific.h
++++ b/Source/OpenEXR/IlmImf/ImfSystemSpecific.h
+@@ -54,7 +54,22 @@ static bool GLOBAL_SYSTEM_LITTLE_ENDIAN =
+ 
+ #ifdef IMF_HAVE_SSE2
+ 
+-#ifdef __GNUC__
++#ifdef __MINGW64__
++
++#define EXR_FORCEINLINE inline
++#define EXR_RESTRICT __restrict
++
++static void* EXRAllocAligned(size_t size, size_t alignment)
++{
++    __mingw_aligned_malloc(alignment, size);
++}
++
++static void EXRFreeAligned(void* ptr)
++{
++    __mingw_aligned_free(ptr);
++}
++
++#elif defined GNUC
+ // Causes issues on certain gcc versions
+ //#define EXR_FORCEINLINE inline __attribute__((always_inline))
+ #define EXR_FORCEINLINE inline
