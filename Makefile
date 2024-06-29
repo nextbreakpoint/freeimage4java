@@ -38,3 +38,11 @@ copy-legal:
 	cp legal/*.txt freeimage4java-macos/src/main/resources/META-INF/
 	cp legal/*.txt freeimage4java-linux/src/main/resources/META-INF/
 	cp legal/*.txt freeimage4java-windows/src/main/resources/META-INF/
+
+.PHONY: copy-dist
+copy-dist: clean package
+	rm -fR dist
+	mkdir -p dist
+	cp freeimage4java-macos/target/com.nextbreakpoint.freeimage4java.macos-*.jar dist
+	cp freeimage4java-linux/target/com.nextbreakpoint.freeimage4java.linux-*.jar dist
+	cp freeimage4java-windows/target/com.nextbreakpoint.freeimage4java.windows-*.jar dist
