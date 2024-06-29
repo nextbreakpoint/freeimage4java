@@ -226,9 +226,25 @@ Compile and package the JARs:
 
 The artifacts will be created in the target directory of each module:
 
+    freeimage4Java-macos/target/com.nextbreakpoint.freeimage4Java.macos-3.18.0-2.0.jar
     freeimage4Java-macos/target/com.nextbreakpoint.freeimage4Java.macos-3.18.0-2.0-x86_64.jar
+    
+    freeimage4Java-linux/target/com.nextbreakpoint.freeimage4Java.linux-3.18.0-2.0.jar
     freeimage4Java-linux/target/com.nextbreakpoint.freeimage4Java.linux-3.18.0-2.0-x86_64.jar
+    
+    freeimage4Java-windows/target/com.nextbreakpoint.freeimage4Java.windows-3.18.0-2.0.jar
     freeimage4Java-windows/target/com.nextbreakpoint.freeimage4Java.windows-3.18.0-2.0-x86_64.jar
+
+List the content of the JAR files:
+
+    unzip -t freeimage4Java-macos/target/com.nextbreakpoint.freeimage4Java.macos-3.18.0-2.0.jar
+    unzip -t freeimage4Java-macos/target/com.nextbreakpoint.freeimage4Java.macos-3.18.0-2.0-x86_64.jar
+
+    unzip -t freeimage4Java-linux/target/com.nextbreakpoint.freeimage4Java.linux-3.18.0-2.0.jar
+    unzip -t freeimage4Java-linux/target/com.nextbreakpoint.freeimage4Java.linux-3.18.0-2.0-x86_64.jar
+
+    unzip -t freeimage4Java-windows/target/com.nextbreakpoint.freeimage4Java.windows-3.18.0-2.0.jar
+    unzip -t freeimage4Java-windows/target/com.nextbreakpoint.freeimage4Java.windows-3.18.0-2.0-x86_64.jar
 
 Install the artifacts in your local Maven repository:
 
