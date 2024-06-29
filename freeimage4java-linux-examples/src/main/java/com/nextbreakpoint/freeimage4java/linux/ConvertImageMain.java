@@ -21,7 +21,7 @@ class ConvertImageMain {
         final String sourceFileName = args[0];
         final String outputFileName = args[1];
 
-        System.out.println("Converting image to greyscale...");
+        System.out.println("Converting image...");
 
         System.out.println(STR."Source file \{sourceFileName}");
         System.out.println(STR."Output file \{outputFileName}");
