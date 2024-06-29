@@ -2,14 +2,16 @@
 
 set -e
 
-if [ ! -d "$(pwd)/freeimage" ]; then
-  git clone https://github.com/nextbreakpoint/FreeImage.git "$(pwd)/freeimage"
+FREEIMAGE_HOME=$(pwd)/freeimage
+
+if [ ! -d "$FREEIMAGE_HOME" ]; then
+  git clone https://github.com/nextbreakpoint/FreeImage.git "$FREEIMAGE_HOME"
 else
-  pushd "$(pwd)/freeimage"
+  pushd "$FREEIMAGE_HOME"
   git fetch
   popd
 fi
 
-pushd "$(pwd)/freeimage"
+pushd "$FREEIMAGE_HOME"
 git checkout ee5b759719c5d3f8dd62ac0a71129a14cab5b0cd
 popd

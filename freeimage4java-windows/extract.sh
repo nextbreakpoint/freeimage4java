@@ -1,7 +1,7 @@
 #!/bin/sh
 
-FREEIMAGE_HOME="Z:/Documents/projects/github/freeimage4java/freeimage4java-windows/native/freeimage/Dist"
-INCLUDE_PATH="C:/Users/andrea/Documents/cygwin/usr/include"
+FREEIMAGE_HOME="$(cygpath -w $(pwd)/native/freeimage/Dist)"
+INCLUDE_PATH="$(cygpath -w $CYGWIN_HOME/usr/include)"
 
 export PATH=$PATH:${JEXTRACT_HOME}/bin
 
