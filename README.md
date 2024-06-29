@@ -272,7 +272,14 @@ Generate the code for Windows (must be executed on Windows):
 ## Code examples
 
 A simple example is provided for each supported system.
-Look at the POM files for details about how to download the native library and execute the code.
+
+See POM files for details about how to download the native library and execute the code:
+
+    freeimage4Java-macos-examples/pom.xml
+
+    freeimage4Java-linux-examples/pom.xml
+
+    freeimage4Java-windows-examples/pom.xml
 
 
 ## References
