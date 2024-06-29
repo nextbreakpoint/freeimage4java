@@ -46,3 +46,7 @@ copy-dist: clean package
 	cp freeimage4java-macos/target/com.nextbreakpoint.freeimage4java.macos-*.jar dist
 	cp freeimage4java-linux/target/com.nextbreakpoint.freeimage4java.linux-*.jar dist
 	cp freeimage4java-windows/target/com.nextbreakpoint.freeimage4java.windows-*.jar dist
+
+.PHONY: release
+release:
+	mvn -Dchannel=ossrh clean deploy
