@@ -47,6 +47,16 @@ dist:
 	cp freeimage4java-linux/target/com.nextbreakpoint.freeimage4java.linux-*.jar dist
 	cp freeimage4java-windows/target/com.nextbreakpoint.freeimage4java.windows-*.jar dist
 
-.PHONY: release
-release:
+.PHONY: github-release
+github-release:
+	mvn -Dchannel=github clean package de.jutzig:github-release-plugin:release -Dgithub.draft=true
+
+.PHONY: maven-release
+maven-release:
 	mvn -Dchannel=ossrh clean deploy
+
+.PHONY: set-version
+set-version:
+	test $(version)
+	mvn versions:set -DnewVersion=$(version)
+	mvn versions:commit
