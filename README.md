@@ -1,4 +1,4 @@
-# FreeImage4Java 3.18.0-2.0
+# FreeImage4Java 3.18.0-2.1
 
 FreeImage4Java provides a Java wrapper of FreeImage library version 3.18.0.
 
@@ -54,19 +54,19 @@ If you are using Maven, add one of the following dependencies in your POM:
     <dependency>
         <groupId>com.nextbreakpoint</groupId>
         <artifactId>com.nextbreakpoint.freeimage4Java.macos</artifactId>
-        <version>3.18.0-2.0</version>
+        <version>3.18.0-2.1</version>
     </dependency>
     
     <dependency>
         <groupId>com.nextbreakpoint</groupId>
         <artifactId>com.nextbreakpoint.freeimage4Java.linux</artifactId>
-        <version>3.18.0-2.0</version>
+        <version>3.18.0-2.1</version>
     </dependency>
     
     <dependency>
         <groupId>com.nextbreakpoint</groupId>
         <artifactId>com.nextbreakpoint.freeimage4Java.windows</artifactId>
-        <version>3.18.0-2.0</version>
+        <version>3.18.0-2.1</version>
     </dependency>
 
 Also, add one of the following to download the native library:
@@ -226,25 +226,25 @@ Compile and package the JARs:
 
 The artifacts will be created in the target directory of each module:
 
-    freeimage4Java-macos/target/com.nextbreakpoint.freeimage4Java.macos-3.18.0-2.0.jar
-    freeimage4Java-macos/target/com.nextbreakpoint.freeimage4Java.macos-3.18.0-2.0-x86_64.jar
+    freeimage4Java-macos/target/com.nextbreakpoint.freeimage4Java.macos-3.18.0-2.1.jar
+    freeimage4Java-macos/target/com.nextbreakpoint.freeimage4Java.macos-3.18.0-2.1-x86_64.jar
     
-    freeimage4Java-linux/target/com.nextbreakpoint.freeimage4Java.linux-3.18.0-2.0.jar
-    freeimage4Java-linux/target/com.nextbreakpoint.freeimage4Java.linux-3.18.0-2.0-x86_64.jar
+    freeimage4Java-linux/target/com.nextbreakpoint.freeimage4Java.linux-3.18.0-2.1.jar
+    freeimage4Java-linux/target/com.nextbreakpoint.freeimage4Java.linux-3.18.0-2.1-x86_64.jar
     
-    freeimage4Java-windows/target/com.nextbreakpoint.freeimage4Java.windows-3.18.0-2.0.jar
-    freeimage4Java-windows/target/com.nextbreakpoint.freeimage4Java.windows-3.18.0-2.0-x86_64.jar
+    freeimage4Java-windows/target/com.nextbreakpoint.freeimage4Java.windows-3.18.0-2.1.jar
+    freeimage4Java-windows/target/com.nextbreakpoint.freeimage4Java.windows-3.18.0-2.1-x86_64.jar
 
 List the content of the JAR files:
 
-    unzip -t freeimage4Java-macos/target/com.nextbreakpoint.freeimage4Java.macos-3.18.0-2.0.jar
-    unzip -t freeimage4Java-macos/target/com.nextbreakpoint.freeimage4Java.macos-3.18.0-2.0-x86_64.jar
+    unzip -t freeimage4Java-macos/target/com.nextbreakpoint.freeimage4Java.macos-3.18.0-2.1.jar
+    unzip -t freeimage4Java-macos/target/com.nextbreakpoint.freeimage4Java.macos-3.18.0-2.1-x86_64.jar
 
-    unzip -t freeimage4Java-linux/target/com.nextbreakpoint.freeimage4Java.linux-3.18.0-2.0.jar
-    unzip -t freeimage4Java-linux/target/com.nextbreakpoint.freeimage4Java.linux-3.18.0-2.0-x86_64.jar
+    unzip -t freeimage4Java-linux/target/com.nextbreakpoint.freeimage4Java.linux-3.18.0-2.1.jar
+    unzip -t freeimage4Java-linux/target/com.nextbreakpoint.freeimage4Java.linux-3.18.0-2.1-x86_64.jar
 
-    unzip -t freeimage4Java-windows/target/com.nextbreakpoint.freeimage4Java.windows-3.18.0-2.0.jar
-    unzip -t freeimage4Java-windows/target/com.nextbreakpoint.freeimage4Java.windows-3.18.0-2.0-x86_64.jar
+    unzip -t freeimage4Java-windows/target/com.nextbreakpoint.freeimage4Java.windows-3.18.0-2.1.jar
+    unzip -t freeimage4Java-windows/target/com.nextbreakpoint.freeimage4Java.windows-3.18.0-2.1-x86_64.jar
 
 Install the artifacts in your local Maven repository:
 
