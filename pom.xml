@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.nextbreakpoint</groupId>
     <artifactId>com.nextbreakpoint.freeimage4java</artifactId>
-    <version>3.18.0-2.1</version>
+    <version>3.18.0-2.2</version>
     <packaging>pom</packaging>
     <name>FreeImage4Java</name>
     <description>FreeImage4Java provides a Java wrapper of FreeImage library</description>
@@ -270,14 +270,14 @@
     </dependencies>
     <profiles>
         <profile>
-            <id>windows</id>
+            <id>macos</id>
             <properties>
                 <arch.type>x86_64</arch.type>
-                <os.type>windows</os.type>
+                <os.type>macos</os.type>
             </properties>
             <modules>
-                <module>freeimage4java-windows-test</module>
-                <module>freeimage4java-windows-examples</module>
+                <module>freeimage4java-tests</module>
+                <module>freeimage4java-examples</module>
             </modules>
         </profile>
         <profile>
@@ -287,19 +287,19 @@
                 <os.type>linux</os.type>
             </properties>
             <modules>
-                <module>freeimage4java-linux-test</module>
-                <module>freeimage4java-linux-examples</module>
+                <module>freeimage4java-tests</module>
+                <module>freeimage4java-examples</module>
             </modules>
         </profile>
         <profile>
-            <id>macos</id>
+            <id>windows</id>
             <properties>
                 <arch.type>x86_64</arch.type>
-                <os.type>macos</os.type>
+                <os.type>windows</os.type>
             </properties>
             <modules>
-                <module>freeimage4java-macos-test</module>
-                <module>freeimage4java-macos-examples</module>
+                <module>freeimage4java-tests</module>
+                <module>freeimage4java-examples</module>
             </modules>
         </profile>
         <profile>
@@ -368,8 +368,6 @@
                                 <fileSet>
                                     <directory>${project.basedir}</directory>
                                     <includes>
-                                        <include>**/target/${project.artifactId}-${project.version}-x86_64.jar</include>
-                                        <include>**/target/${project.artifactId}-${project.version}-x86_64.jar</include>
                                         <include>**/target/${project.artifactId}-${project.version}-x86_64.jar</include>
                                     </includes>
                                 </fileSet>
