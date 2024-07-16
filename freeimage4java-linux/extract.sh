@@ -6,7 +6,7 @@ export PATH=$PATH:${JEXTRACT_HOME}/bin
 
 jextract @includes.txt \
   --output src/main/java \
-  --target-package com.nextbreakpoint.freeimage4java.linux \
+  --target-package com.nextbreakpoint.freeimage4java \
   --include-dir "${FREEIMAGE_HOME}" \
   --use-system-load-library \
   --library freeimage4java \

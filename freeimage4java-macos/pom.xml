@@ -4,7 +4,7 @@
     <parent>
         <groupId>com.nextbreakpoint</groupId>
         <artifactId>com.nextbreakpoint.freeimage4java</artifactId>
-        <version>3.18.0-2.1</version>
+        <version>3.18.0-2.2</version>
     </parent>
     <artifactId>com.nextbreakpoint.freeimage4java.macos</artifactId>
     <packaging>jar</packaging>
